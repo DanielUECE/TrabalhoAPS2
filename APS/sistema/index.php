@@ -82,7 +82,7 @@
 						<div class="col-md-12">
 				    		<p>Você possui uma conta?</h3>
 				    		<br />
-							<form method="post" action="validar_acesso.php" id="formLogin">
+							<form method="post" action="validar_acesso_usuario.php" id="formLogin">
 								<div class="form-group">
 									<input type="text" class="form-control"  id="campo_usuario" name="usuario" placeholder="Usuário" />
 								</div>
@@ -95,6 +95,23 @@
 
 								<br /><br />
 								
+							</form>
+
+							<p>Login para o administrador</p>
+							
+							<form method="post" action="validar_acesso_administrador.php" id="formLogin">
+								<div class="form-group">
+									<input type="text" class="form-control" id="campo_administrador" name="nome" placeholder="Administrador" />			
+								</div>
+
+								<div class="form-group">
+									<input type="password" class="form-control red" id="campo_senha" name="senha" placeholder="Senha" />
+								</div>
+								
+								<button type="buttom" class="btn btn-primary" id="btn_login">Login</button>
+
+								<br /><br />
+
 							</form>
 
 							<?php
