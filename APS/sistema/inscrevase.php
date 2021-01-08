@@ -1,8 +1,17 @@
 <?php
 	include_once("db.class.php");
+	include_once("usuario.php");
 
 	$objDb = new db();
 	$link = $objDb->conecta_mysql();
+
+	$objUsuario = new Usuario();
+
+	if(isset($_POST['btCadastrar'])){
+		$objUsuario->cadastrarUsuario($_POST);
+	}
+
+
 ?>
 
 <!DOCTYPE HTML>
@@ -53,7 +62,7 @@
 	    	<div class="col-md-4">
 	    		<h3>Cadastre-se já.</h3>
 	    		<br />
-				<form method="post" action="cadastro_usuarios.php" id="formCadastrarse">
+				<form method="post" action="" id="formCadastrarse">
 					<div class="form-group">
 						<input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" required="requiored">
 					</div>
@@ -86,7 +95,7 @@
 
 					
 					
-					<button type="submit" class="btn btn-primary form-control">Inscreva-se</button>
+					<button type="submit" name="btCadastrar" class="btn btn-primary form-control">Inscreva-se</button>
 				</form>
 			</div>
 			<div class="col-md-4"></div>

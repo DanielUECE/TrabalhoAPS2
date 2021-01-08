@@ -3,6 +3,23 @@
 	// caso o indice erro exista, entao atribua a variavel $erro, caso contrário atribua o 0 ao $erro
 	$erro = isset($_GET['erro']) ? $_GET['erro'] : 0;
 
+	include_once("db.class.php");
+	include_once("usuario.php");
+	include_once("administrador.php");
+
+	$objUsuario = new Usuario();
+	$objAdm = new Administrador();
+
+	if(isset($_POST['btnLogarUsuario'])){
+		$objUsuario->login($_POST);
+	}
+
+	if(isset($_POST['btnLogarAdm'])){
+		$objAdm->login($_POST);
+	}
+
+
+
 ?>
 
 <!DOCTYPE HTML>
@@ -82,7 +99,7 @@
 						<div class="col-md-12">
 				    		<p>Você possui uma conta?</h3>
 				    		<br />
-							<form method="post" action="validar_acesso_usuario.php" id="formLogin">
+							<form method="post" action="" id="formLogin">
 								<div class="form-group">
 									<input type="text" class="form-control"  id="campo_usuario" name="usuario" placeholder="Usuário" />
 								</div>
@@ -91,7 +108,7 @@
 									<input type="password" class="form-control red" id="campo_senha" name="senha" placeholder="Senha" />
 								</div>
 								
-								<button type="buttom" class="btn btn-primary" id="btn_login">Login</button>
+								<button type="buttom" name="btnLogarUsuario" class="btn btn-primary" id="btn_login">Login</button>
 
 								<br /><br />
 								
@@ -99,7 +116,7 @@
 
 							<p>Login para o administrador</p>
 							
-							<form method="post" action="validar_acesso_administrador.php" id="formLogin">
+							<form method="post" action="" id="formLogin">
 								<div class="form-group">
 									<input type="text" class="form-control" id="campo_administrador" name="nome" placeholder="Administrador" />			
 								</div>
@@ -108,7 +125,7 @@
 									<input type="password" class="form-control red" id="campo_senha" name="senha" placeholder="Senha" />
 								</div>
 								
-								<button type="buttom" class="btn btn-primary" id="btn_login">Login</button>
+								<button type="buttom" name="btnLogarAdm" class="btn btn-primary" id="btn_login">Login</button>
 
 								<br /><br />
 
