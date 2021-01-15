@@ -1,15 +1,15 @@
 <?php
-	include_once("db.class.php");
-	include_once("usuario.php");
+	include_once("../db.class.php");
+	//include_once("usuario.php");
 
 	$objDb = new db();
 	$link = $objDb->conecta_mysql();
 
-	$objUsuario = new Usuario();
+	//$objUsuario = new Usuario();
 
-	if(isset($_POST['btCadastrar'])){
-		$objUsuario->cadastrarUsuario($_POST);
-	}
+	//if(isset($_POST['btCadastrar'])){
+	//	$objUsuario->cadastrarUsuario($_POST);
+	//}
 
 
 ?>
@@ -26,7 +26,7 @@
 
 		<!-- bootstrap - link cdn -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-		<link rel="stylesheet" href="estilo.css">
+		<link rel="stylesheet" href="../css/estilo.css">
 	
 	</head>
 
@@ -42,7 +42,7 @@
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
 	          </button>
-	          <img src="imagens/imagem1.jpg" width=60%/>
+	          <img src="../imagens/imagem1.jpg" width=60%/>
 	        </div>
 	        
 	        <div id="navbar" class="navbar-collapse collapse">
@@ -62,7 +62,7 @@
 	    	<div class="col-md-4">
 	    		<h3>Cadastre-se já.</h3>
 	    		<br />
-				<form method="post" action="" id="formCadastrarse">
+				<form method="post" action="../controllers/cadastroUsuarioController.php" id="formCadastrarse">
 					<div class="form-group">
 						<input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" required="requiored">
 					</div>

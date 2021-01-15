@@ -3,25 +3,27 @@
 	//Abrindo a sessão
 	session_start();
 
-	include_once("db.class.php");
-	include_once("administrador.php");
+	
+	include_once("../models/administrador.php");
 
 	$objDb = new db();
 	$link = $objDb->conecta_mysql();
 
 	// Verificando se a variável de sessão não existe. Com isso, ele só entra na home se as variáveis de sessão estiverem autenticadas.
-	if(!isset($_SESSION['id'])){
+	/*if(!isset($_SESSION['id'])){
 		header('Location: index.php?erro=1');
 	}
 
-	$id_usuario = $_SESSION['id'];
 
+	$id_usuario = $_SESSION['id'];
 
 	$objAdm = new Administrador();
 
-	if(isset($_POST['btCadastrar_livro'])){
-		$objAdm->cadastrar_livro($_POST);
-	}
+	if(isset($_POST['btInserir_Categorias'])){
+		$objAdm->inserir_categoria($_POST);
+	}*/
+
+
 
 
 ?>
@@ -39,7 +41,7 @@
 		<!-- bootstrap - link cdn -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
-		<link rel="stylesheet" href="estilo.css">
+		<link rel="stylesheet" href="../css/estilo.css">
 		
 		<script>
 
@@ -49,13 +51,19 @@
 
 				$('#btn_inserir_categorias').click(function(){
 
-					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/inserir_categorias.php";
+					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_categorias.php";
 
 				});
 
 				$('#btn_inserir_autores').click(function(){
 
-					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/inserir_autores.php";
+					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_autores.php";
+
+				});
+
+				$('#btn_inserir_editoras').click(function(){
+
+					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_editoras.php";
 
 				});
 
@@ -118,15 +126,15 @@
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
 	          </button>
-	          <img src="imagens/imagem1.jpg" width=60%/>
+	          <img src="../imagens/imagem1.jpg" width=60%/>
 	        </div>
 	        
 	        <div id="navbar" class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav navbar-right">
 	          	<li><a href="homeAdm.php"><h3>Home</h3></a></li>
-	          	<li><a href="cadastrar_livro.php"><h3>Cadastrar novos livros</h3></a></li>
-	          	<li><a href="procurar_alunos.php"><h3>Procurar livros</h3></a></li>
-	            <li><a href="sair.php"><h3>Sair</h3></a></li>
+	          	<li><a href="../cadastrar_livro.php"><h3>Cadastrar novos livros</h3></a></li>
+	          	<li><a href="../procurar_alunos.php"><h3>Procurar livros</h3></a></li>
+	            <li><a href="../controllers/sair.php"><h3>Sair</h3></a></li>
 	          </ul>
 	        </div><!--/.nav-collapse -->
 	      </div>
@@ -157,6 +165,7 @@
 	    		<br>
 	    		<br>
 	    		<br>
+	    		
 	    		<div class="panel panel-default">
 					<div class="panel-body">
 						<h2><?=$_SESSION['nome']?></h2>
@@ -176,102 +185,15 @@
 				
 	    	</div>
 	    	<div class="col-md-4">
-
-	    		<h3>Cadastro de livros</h3>
+	    		<h3>Cadastro de categorias.</h3>
 	    		<br />
-	    		<form method="post" action="" id="formCadastrarse">
+	    		<form method="post" action="../controllers/inserir_categoriasController.php" id="formCadastrarse">
 					<div class="form-group">
-						<input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título*" required="requiored">
+						<input type="text" class="form-control" id="nome" name="genero" placeholder="Gênero" required="requiored">
 					</div>
 
-					<div class="form-group">
-						<input type="text" class="form-control" id="preco" name="preco" placeholder="Preço*" required="requiored">
-					</div>
-
-					<div class="form-group">
-						<input type="text" class="form-control" id="ano_publicacao" name="ano_publicacao" placeholder="Ano de publicação">
-					</div>
-
-					<div class="form-group">
-						<input type="text" class="form-control" id="idioma" name="idioma" placeholder="Idioma" >
-					</div>
-
-					<div class="form-group">
-						<input type="number" class="form-control" id="paginas" name="paginas" placeholder="Quantidade de páginas">
-					</div>
-
-					<div class="form-group">
-						<input type="text" class="form-control" id="exemplares" name="exemplares" placeholder="Exemplares">
-					</div>
-
-					<div class="form-group">
-						<input type="text" class="form-control" id="edicao" name="edicao" placeholder="Edição">
-					</div>
-
-					<div class="form-group">
-						<input type="text" class="form-control" id="autor" name="autor" placeholder="Autores*">
-					</div>
-
-					<!--A categoria é selecionada a partir das categorias do banco de dados -->
-					<div class="form-group">
-						<select type="text" class="form-control" name="categoria" id="categoria">
-							<option>Selecione uma categoria*</option>	
-							<?php
-								$sql = " select * from categoria";
-								$result_categorias = mysqli_query($link, $sql);
-								//$lista_cursos = mysqli_fetch_array($result_cursos);
-								while($row_categorias = mysqli_fetch_assoc($result_categorias)){
-									?>
-																<!--Ele passa no post o value, ou seja o id da categoria-->
-									<option value="<?php echo $row_categorias['id']; ?>"><?php echo $row_categorias['genero']; ?>
-										
-									</option> <?php
-								}
-							?>				
-						</select>
-					</div>
-
-					<!--A editora é selecionada a partir das editoras do banco de dados -->
-					<div class="form-group">
-						<select type="text" class="form-control" name="editora" id="editora">
-							<option>Selecione uma editora*</option>	
-							<?php
-								$sql = " select * from editoras";
-								$result_editoras = mysqli_query($link, $sql);
-								//$lista_cursos = mysqli_fetch_array($result_cursos);
-								while($row_editoras = mysqli_fetch_assoc($result_editoras)){
-									?>
-																<!--Ele passa no post o value, ou seja o id da categoria-->
-									<option value="<?php echo $row_editoras['id']; ?>"><?php echo $row_editoras['nome']; ?>
-										
-									</option> <?php
-								}
-							?>				
-						</select>
-					</div>
-
-
-					<div class="form-group">
-						<h1 class="form-control">Capa do livro: *</h1>
-						<input type="file"  id="capa" name="capa" placeholder="Capa do livro" required="requiored">
-					</div>
-
-					<div class="form-group">
-						<h1 class="form-control">Foto extra 1 (opcional): </h1>
-						<input type="file"  id="foto_extra1" name="foto_extra1" placeholder="foto_extra1">
-					</div>
-
-					<div class="form-group">
-						<h1 class="form-control">Foto extra 2 (opcional): </h1>
-						<input type="file"  id="foto_extra2" name="foto_extra2" placeholder="foto_extra2">
-					</div>
-
-
-
-					<button type="submit" name="btCadastrar_livro" class="btn btn-primary form-control">Cadastrar</button>
+					<button type="submit" name="btInserir_Categorias" class="btn btn-primary form-control">Inserir</button>
 				</form>
-
-	    
 	    		 	    		
 			</div>
 			<div class="col-md-4">

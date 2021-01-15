@@ -1,7 +1,7 @@
 <?php
 
 
-require_once('db.class.php');
+require_once('../db.class.php');
 
 require_once('autor.php');
 require_once('categoria.php');
@@ -84,10 +84,10 @@ class Administrador{
 				$_SESSION['nome'] = $dados_administrador['nome'];
 				$_SESSION['email'] = $dados_administrador['email'];
 
-				header('Location: homeAdm.php');
+				header('Location: ../views/homeAdm.php');
 			
 			} else{
-				header('Location: index.php?erro=1');
+				header('Location: ../index.php?erro=1');
 			}
 
 		} else{
@@ -180,7 +180,7 @@ class Administrador{
 				$retorno_get.="erro_autor=1&";
 			}
 
-			header('Location: inserir_categoria.php?'.$retorno_get);
+			header('Location: ../views/inserir_categoria.php?'.$retorno_get);
 			//echo "Gênero já existe no banco de dados";
 			
 			die();	
@@ -232,7 +232,7 @@ class Administrador{
 				$retorno_get.="erro_editora=1&";
 			}
 
-			header('Location: inserir_editoras.php?'.$retorno_get);
+			header('Location: ../views/inserir_editoras.php?'.$retorno_get);
 			//echo "Gênero já existe no banco de dados";
 			
 			die();	

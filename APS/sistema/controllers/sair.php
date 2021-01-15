@@ -7,7 +7,7 @@ unset($_SESSION['nome']);
 unset($_SESSION['email']);
 
 
-header('Location: index.php');
+header('Location: ../views/index.php');
 
 
 

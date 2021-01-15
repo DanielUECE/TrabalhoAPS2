@@ -3,26 +3,22 @@
 	//Abrindo a sessão
 	session_start();
 
-	include_once("db.class.php");
-	include_once("administrador.php");
-
-	$objDb = new db();
-	$link = $objDb->conecta_mysql();
+	
+	//include_once("administrador.php");
 
 	// Verificando se a variável de sessão não existe. Com isso, ele só entra na home se as variáveis de sessão estiverem autenticadas.
-	if(!isset($_SESSION['id'])){
+	/*if(!isset($_SESSION['id'])){
 		header('Location: index.php?erro=1');
 	}
 
-
 	$id_usuario = $_SESSION['id'];
+
 
 	$objAdm = new Administrador();
 
-	if(isset($_POST['btInserir_Categorias'])){
-		$objAdm->inserir_categoria($_POST);
-	}
-
+	if(isset($_POST['btInserir_Editoras'])){
+		$objAdm->inserir_editora($_POST);
+	}*/
 
 
 
@@ -41,7 +37,7 @@
 		<!-- bootstrap - link cdn -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
-		<link rel="stylesheet" href="estilo.css">
+		<link rel="stylesheet" href="../css/estilo.css">
 		
 		<script>
 
@@ -51,19 +47,19 @@
 
 				$('#btn_inserir_categorias').click(function(){
 
-					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/inserir_categorias.php";
+					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_categorias.php";
 
 				});
 
 				$('#btn_inserir_autores').click(function(){
 
-					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/inserir_autores.php";
+					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_autores.php";
 
 				});
 
 				$('#btn_inserir_editoras').click(function(){
 
-					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/inserir_editoras.php";
+					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_editoras.php";
 
 				});
 
@@ -126,7 +122,7 @@
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
 	          </button>
-	          <img src="imagens/imagem1.jpg" width=60%/>
+	          <img src="../imagens/imagem1.jpg" width=60%/>
 	        </div>
 	        
 	        <div id="navbar" class="navbar-collapse collapse">
@@ -134,7 +130,7 @@
 	          	<li><a href="homeAdm.php"><h3>Home</h3></a></li>
 	          	<li><a href="cadastrar_livro.php"><h3>Cadastrar novos livros</h3></a></li>
 	          	<li><a href="procurar_alunos.php"><h3>Procurar livros</h3></a></li>
-	            <li><a href="sair.php"><h3>Sair</h3></a></li>
+	            <li><a href="../controllers/sair.php"><h3>Sair</h3></a></li>
 	          </ul>
 	        </div><!--/.nav-collapse -->
 	      </div>
@@ -185,15 +181,23 @@
 				
 	    	</div>
 	    	<div class="col-md-4">
-	    		<h3>Cadastro de categorias.</h3>
+
+	    		<h3>Cadastro de editoras.</h3>
 	    		<br />
-	    		<form method="post" action="" id="formCadastrarse">
+	    		<form method="post" action="../controllers/inserir_editorasController.php" id="formCadastrarse">
 					<div class="form-group">
-						<input type="text" class="form-control" id="nome" name="genero" placeholder="Gênero" required="requiored">
+						<input type="text" class="form-control" id="nome" name="nome" placeholder="Nome da Editora" required="requiored">
 					</div>
 
-					<button type="submit" name="btInserir_Categorias" class="btn btn-primary form-control">Inserir</button>
+					<div class="form-group">
+						<input type="text" class="form-control" id="endereco" name="endereco" placeholder="Endereço da Editora" required="requiored">
+					</div>
+
+
+					<button type="submit" name="btInserir_Editoras" class="btn btn-primary form-control">Inserir</button>
 				</form>
+
+
 	    		 	    		
 			</div>
 			<div class="col-md-4">

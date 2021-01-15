@@ -1,8 +1,6 @@
 <?php
 
 
-require_once('db.class.php');
-
 
 class Autor{
 	private $nome;

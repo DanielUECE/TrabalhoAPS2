@@ -3,11 +3,11 @@
 	// caso o indice erro exista, entao atribua a variavel $erro, caso contrário atribua o 0 ao $erro
 	$erro = isset($_GET['erro']) ? $_GET['erro'] : 0;
 
-	include_once("db.class.php");
-	include_once("usuario.php");
-	include_once("administrador.php");
+	//include_once("db.class.php");
+	//include_once("usuario.php");
+	//include_once("administrador.php");
 
-	$objUsuario = new Usuario();
+	/*$objUsuario = new Usuario();
 	$objAdm = new Administrador();
 
 	if(isset($_POST['btnLogarUsuario'])){
@@ -16,7 +16,7 @@
 
 	if(isset($_POST['btnLogarAdm'])){
 		$objAdm->login($_POST);
-	}
+	}*/
 
 
 
@@ -36,7 +36,7 @@
 
 		<!-- bootstrap - link cdn -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-		<link rel="stylesheet" href="estilo.css">
+		<link rel="stylesheet" href="../css/estilo.css">
 
 
 	
@@ -87,7 +87,7 @@
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
 	          </button>
-	          <img src="imagens/imagem1.jpg" width=60%/>
+	          <img src="../imagens/imagem1.jpg" width=60%/>
 	        </div>
 	        
 	        <div id="navbar" class="navbar-collapse collapse">
@@ -99,7 +99,7 @@
 						<div class="col-md-12">
 				    		<p>Você possui uma conta?</h3>
 				    		<br />
-							<form method="post" action="" id="formLogin">
+							<form method="post" action="../controllers/loginUsuarioController.php" id="formLogin">
 								<div class="form-group">
 									<input type="text" class="form-control"  id="campo_usuario" name="usuario" placeholder="Usuário" />
 								</div>
@@ -116,7 +116,7 @@
 
 							<p>Login para o administrador</p>
 							
-							<form method="post" action="" id="formLogin">
+							<form method="post" action="../controllers/loginAdministradorController.php" id="formLogin">
 								<div class="form-group">
 									<input type="text" class="form-control" id="campo_administrador" name="nome" placeholder="Administrador" />			
 								</div>
@@ -158,7 +158,7 @@
 	      </div>
 
 	      <div class="jumbotron cor-fundo">
-	        <img src="imagens/imagem2.jpg" width= 90%/>
+	        <img src="../imagens/imagem2.jpg" width= 90%/>
 	        <h3 id="subtitulo"></h3>
 	        <p></p>
 	      </div>

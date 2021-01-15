@@ -1,7 +1,7 @@
 <?php
 
 
-require_once ('db.class.php');
+require_once ('../db.class.php');
 
 class Usuario{
 
@@ -196,10 +196,10 @@ class Usuario{
 				$_SESSION['email'] = $dados_usuario['email'];
 
 
-				header('Location: home.php');
+				header('Location: ../home.php');
 			
 			} else{
-				header('Location: index.php?erro=1');
+				header('Location: ../index.php?erro=1');
 			}
 
 
