@@ -4,6 +4,7 @@
 	session_start();
 
 	include_once("db.class.php");
+	include_once("administrador.php");
 
 	$objDb = new db();
 	$link = $objDb->conecta_mysql();
@@ -13,8 +14,15 @@
 		header('Location: index.php?erro=1');
 	}
 
-
 	$id_usuario = $_SESSION['id'];
+
+
+	$objAdm = new Administrador();
+
+	if(isset($_POST['btInserir_Editoras'])){
+		$objAdm->inserir_editora($_POST);
+	}
+
 
 
 ?>
@@ -57,7 +65,6 @@
 					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/inserir_editoras.php";
 
 				});
-
 
 				$('#pagina_inicial').click(function(){
 					
@@ -157,6 +164,7 @@
 	    		<br>
 	    		<br>
 	    		<br>
+	    		
 	    		<div class="panel panel-default">
 					<div class="panel-body">
 						<h2><?=$_SESSION['nome']?></h2>
@@ -177,11 +185,22 @@
 	    	</div>
 	    	<div class="col-md-4">
 
+	    		<h3>Cadastro de editoras.</h3>
+	    		<br />
+	    		<form method="post" action="" id="formCadastrarse">
+					<div class="form-group">
+						<input type="text" class="form-control" id="nome" name="nome" placeholder="Nome da Editora" required="requiored">
+					</div>
 
-	    		
+					<div class="form-group">
+						<input type="text" class="form-control" id="endereco" name="endereco" placeholder="Endereço da Editora" required="requiored">
+					</div>
 
 
-	    		
+					<button type="submit" name="btInserir_Editoras" class="btn btn-primary form-control">Inserir</button>
+				</form>
+
+
 	    		 	    		
 			</div>
 			<div class="col-md-4">
