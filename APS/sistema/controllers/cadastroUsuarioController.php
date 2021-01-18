@@ -1,7 +1,7 @@
 <?php
 
 
-	include_once('../usuario.php');
+	include_once('../models/usuario.php');
 	
 	$dados = $_POST;
 

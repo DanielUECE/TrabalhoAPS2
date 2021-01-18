@@ -62,7 +62,7 @@ class Administrador{
 
 		session_start();
 
-		$this->nome = $dado['nome'];
+		$this->nome = $dado['usuario'];
 		$this->senha = $dado['senha'];
 
 		$link = $this->objDb->conecta_mysql();

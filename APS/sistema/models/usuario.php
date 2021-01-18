@@ -196,7 +196,7 @@ class Usuario{
 				$_SESSION['email'] = $dados_usuario['email'];
 
 
-				header('Location: ../home.php');
+				header('Location: ../views/home.php');
 			
 			} else{
 				header('Location: ../index.php?erro=1');

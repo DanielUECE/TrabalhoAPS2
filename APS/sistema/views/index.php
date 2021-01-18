@@ -114,7 +114,7 @@
 								
 							</form>
 
-							<p>Login para o administrador</p>
+							<!--<p>Login para o administrador</p>
 							
 							<form method="post" action="../controllers/loginAdministradorController.php" id="formLogin">
 								<div class="form-group">
@@ -129,7 +129,7 @@
 
 								<br /><br />
 
-							</form>
+							</form> -->
 
 							<?php
 								if($erro == 1){
