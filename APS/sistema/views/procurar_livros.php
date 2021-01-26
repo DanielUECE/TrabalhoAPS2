@@ -3,7 +3,7 @@
 	//Abrindo a sessão
 	session_start();
 
-	include_once("../db.class.php");
+	/*include_once("db.class.php");
 
 	$objDb = new db();
 	$link = $objDb->conecta_mysql();
@@ -14,7 +14,8 @@
 	}
 
 
-	$id_usuario = $_SESSION['id'];
+	$id_usuario = $_SESSION['id'];*/
+
 
 ?>
 
@@ -39,6 +40,31 @@
 			//Verificando se o documento foi carregado
 			$(document).ready( function(){
 
+				$('#btn_inserir_categorias').click(function(){
+
+					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_categorias.php";
+
+				});
+
+				$('#btn_inserir_autores').click(function(){
+
+					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_autores.php";
+
+				});
+
+				$('#btn_inserir_autores_nos_livros').click(function(){
+
+					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_autor_livro.php";
+
+				});
+
+				$('#btn_inserir_editoras').click(function(){
+
+					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_editoras.php";
+
+				});
+
+
 				$('#pagina_inicial').click(function(){
 					
 					// Direcionando o aluno para a página inicial.
@@ -51,49 +77,21 @@
 					window.location.href = "http://localhost/UECEBOOK/uecebook/home.php";
 				});
 
-				// Direcionando o aluno para uma determinada comunidade
-				/*$('#1').click(function(){
+				
+				//associar o evento de click ao botão
+				$('#btn_procurar_livros').click( function(){	
 
-					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/romance.php";
-					
-				});*/
+					if($('#nome_livro').val().length > 0){
+						$.ajax({
 
-				$('#2').click(function(){
-
-					window.location.href = "http://localhost/UECEBOOK/uecebook/comunidade_cct.php";
-
-				});
-
-				$('#3').click(function(){
-
-					window.location.href = "http://localhost/UECEBOOK/uecebook/comunidade_ch.php";
-
-				});
-
-				$('#4').click(function(){
-
-					window.location.href = "http://localhost/UECEBOOK/uecebook/comunidade_cesa.php";
-
-				});
-
-				$('#5').click(function(){
-
-					window.location.href = "http://localhost/UECEBOOK/uecebook/comunidade_ccs.php";
-
-				});
-
-				$.ajax({
-
-							url: '../controllers/get_livrosUsuario.php',
+							url: '../controllers/get_livros.php',
 							method: 'post', 
-							//data: $('#form_procurar_livros').serialize(),
+							data: $('#form_procurar_livros').serialize(),
 							success: function(data){
 								$('#livros').html(data);
 							
-								$('.btn-inserir-carrinho').click(function(){
-									alert('Item inserido com sucesso');
-									
-									//window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_autor_livro.php";
+								$('.btn-inserir-autores').click(function(){
+									window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_autor_livro.php";
 								});
 							}
 
@@ -101,7 +99,61 @@
 							
 
 						});
+
+					}
+
+
+
+					//Verificando se há alguma coisa no campo
+					//if($('#nome_livro').val().length > 0){
+
+						//{ texto_postagem: $('#texto_postagem').val() }
+						// Enviando a mensagem do campo para o inclui_postagem.php
+					//	$.ajax({
+					//		url: 'get_livros.php',
+					//		method: 'post', 
+					//		data: $('#form_procurar_livros').serialize(),
+							/*success: function(data){
+								$('#livros').html(data);
+								
+								/*$('.btn_seguir').click( function(){
+									var id_aluno = $(this).data('id_aluno');
+
+									$('#btn_seguir_'+id_aluno).hide();
+									$('#btn_deixar_seguir_'+id_aluno).show();
+
+									$.ajax({
+										url: 'seguir.php',
+										method: 'post',
+										data: { seguir_id_aluno: id_aluno },
+										success: function(data){
+											alert('Registro efetuado com sucesso');
+										}
+									});
+								});*/
+
+								/*$('.btn_deixar_seguir').click( function(){
+									var id_aluno = $(this).data('id_aluno');
+
+									$('#btn_seguir_'+id_aluno).show();
+									$('#btn_deixar_seguir_'+id_aluno).hide();
+
+									$.ajax({
+										url: 'deixar_seguir.php',
+										method: 'post',
+										data: { deixar_seguir_id_aluno: id_aluno },
+										success: function(data){
+											alert('Registro removido com sucesso !!!');
+										}
+									});
+
+								});*/
+							//}
+						//});
+					//}
+				});
 			});
+
 		</script>
 	
 	</head>
@@ -123,9 +175,9 @@
 	        
 	        <div id="navbar" class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav navbar-right">
-	          	<li><a href="home.php"><h3>Home</h3></a></li>
-	          	<li><a href="pagina_inicial.php"><h3>Pesquisar livros por categoria</h3></a></li>
-	          	<li><a href="procurar_alunos.php"><h3>Visualizar Carrinho</h3></a></li>
+	          	<li><a href="homeAdm.php"><h3>Home</h3></a></li>
+	          	<li><a href="cadastrar_livro.php"><h3>Cadastrar novos livros</h3></a></li>
+	          	<li><a href="procurar_livros.php"><h3>Procurar livros</h3></a></li>
 	            <li><a href="../controllers/sair.php"><h3>Sair</h3></a></li>
 	          </ul>
 	        </div><!--/.nav-collapse -->
@@ -153,10 +205,13 @@
 
 	    		<br>
 	    		<br>
-	    		
+	    		<br>
+	    		<br>
+	    		<br>
+	    		<br>
 	    		<div class="panel panel-default">
 					<div class="panel-body">
-						<h2>Olá, <?=$_SESSION['nome']?> !!</h2>
+						<h2><?=$_SESSION['nome']?></h2>
 						
 					</div>
 				</div>
@@ -173,72 +228,64 @@
 				
 	    	</div>
 	    	<div class="col-md-4">
-	    		<div class="panel-body">
-	    			
-					<h3>Livros a venda: </h3>
-					<br/>
-					<div id="livros" class="list-group"></div>  <!--Essa tag conterá a listagem de livros-->
-					<!--<table class="table table-condensed">
-						<ul>
-							<?php
-								$sql = " select * from categoria";
-								$result_categorias = mysqli_query($link, $sql);
-
-								while($row_categorias = mysqli_fetch_assoc($result_categorias)){
-									?>
-									<li>
-									<?php 
-										$id_categoria = $row_categorias['id'];
-									?>
-									<button type="button" class="btn btn-primary" id="<?php echo $id_categoria ?>" value="<?php echo $row_categorias['id']; ?>"><?php echo $row_categorias['genero']; ?><?php //echo " - "?><?php //echo $row_categorias['id']; ?>
-										
-									</button> </li> <br> <?php 
-								}
-
-							?>							
-							
-						</ul>
-  					</table>-->
 
 
-					
-				</div>
-	 	    		
+	    		<div class="panel panel-default">
+	    			<div class="panel-body">
+	    				<form id="form_procurar_livros" class="input-group">
+	    					<input type="text" id="nome_livro" name="nome_livro" class="form-control" placeholder="Que livro você está procurando?" maxlength="200">
+	    					<span class="input-group-btn">
+	    						<button class="btn btn-default" id="btn_procurar_livros" type="button">
+	    							Procurar
+	    						</button>
+	    					</span>
+	    				</form>
+	    			</div>
+	    		</div>
+
+	    		<div id="livros" class="list-group"></div>  <!--Essa tag conterá a listagem de livros-->
+
+	    		
+	    		 	    		
 			</div>
 			<div class="col-md-4">
 				
 				
 
 				
-				
-				<div class="container">
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
 				<div class="col-md-3">
 				
-
-
-
-				 
-					<div class="panel panel-default">
-						
-						<div class="panel-body">
-							<strong>
-								<h1 style="color:blue;">Carrinho</h1>
-								<img src="../imagens/carrinho.jpg">
-							</strong>
-							<div class="col-md-6"><h3><strong>Itens: </strong></h3>10<?//= $qtde_postagens ?></div>
-							<div class="col-md-6"><h3><strong>Total: </strong></h3>12,90<?//= $qtde_seguidores ?></div>
-						</div>
-					</div>
-				 
-
-
-
-
-
 					
-					<!--<h3 class="active">Comunidades</h3>
 						
-					<table class="table table-condensed">
+
+						<table class="table table-condensed">
+							<ul>
+								<li>
+									<button type="button" id="btn_inserir_autores" class="btn btn-warning">Inserir novos autores</button>
+								</li> <br/>
+								<li>
+									<button type="button" id="btn_inserir_autores_nos_livros" class="btn btn-warning">Inserir autores nos livros </button>
+								</li> <br/>
+								<li>
+									<button type="button" id="btn_inserir_categorias" class="btn btn-warning">Inserir novas categorias</button>
+								</li> <br/>
+								<li>
+									<button type="button" id="btn_inserir_editoras" class="btn btn-warning">Inserir novas editoras</button>
+								</li>
+							</ul>
+						</table>
+						
+						
+						<!--<h3 class="active">Comunidades</h3>-->
+
+					<!--<table class="table table-condensed">
 						<ul>
 							<?php
 								$sql = " select * from centro";
@@ -262,7 +309,6 @@
 
   						<!--<li><button type="button" class="btn btn-warning"></button></li><br>-->
 				</div>
-				</div>
 				
 			</div>
 
@@ -272,7 +318,7 @@
 
 			<br />
 			<div class="col-md-4"></div>
-			<div class="col-md-4"></div>
+			<!--<div class="col-md-4">Repositório de Trabalhos</div>-->
 			<div class="col-md-4"></div>
 
 		</div>
@@ -310,27 +356,3 @@
 						</select>
 					</div>-->
 </html>	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

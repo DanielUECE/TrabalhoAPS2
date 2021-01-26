@@ -3,6 +3,9 @@
 
 require_once ('../db.class.php');
 
+require_once('livro.php');
+require_once('categoria.php');
+
 class Usuario{
 
 	// Atributos dos usuário
@@ -15,6 +18,8 @@ class Usuario{
 
 	public function __construct(){
 		$this->objDb = new db(); 
+		$this->objLivro = new Livro();
+		$this->objCategoria = new Categoria();
 	}	
 
 	public function getNome(){
@@ -158,7 +163,7 @@ class Usuario{
 
 		 //Executar a query
 		if(mysqli_query($link, $sql)){
-			echo 'Usuário cadastrado com sucesso !!!';
+			echo "<script>alert('Usuário cadastrado com sucesso !!!')</script>";
 		}else{
 			echo 'Erro ao cadastrar o usuário !!!';
 		}
@@ -209,10 +214,30 @@ class Usuario{
 		}
 
 
+	}
+
+	public function pesquisar_livro($dado){
+		$this->objCategoria->getId = $dado['categoria'];
+
+		$id_categoria = $this->objCategoria->getId;
+
+		$link = $this->objDb->conecta_mysql();
 
 
+		$sql = " SELECT c.genero, l.* FROM categoria AS c, livros AS l WHERE c.id = $id_categoria and l.id_categoria = $id_categoria";
+
+		if($resultado_livro = mysqli_query($link, $sql)){
+
+			$dados_livro = mysqli_fetch_array($resultado_livro);
 
 
+			echo "ola";
+
+
+		} else{
+			echo 'Erro ao tentar achar os registros dos livros pesquisados';
+		}
+		
 
 
 

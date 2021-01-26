@@ -110,12 +110,12 @@ class Administrador{
 
 		$autor_existe = false;
 
-		$sql = " SELECT * FROM autores WHERE nome = '$nome_autor' ";
+		$sql = " SELECT * FROM autores WHERE nome_autor = '$nome_autor' ";
 		if($resultado_autor = mysqli_query($link, $sql)){
 
 			$dados_autores = mysqli_fetch_array($resultado_autor);
 
-			if (isset($dados_autores['nome'])){
+			if (isset($dados_autores['nome_autor'])){
 				$autor_existe = true;
 			}
 		}else{
@@ -129,17 +129,18 @@ class Administrador{
 				$retorno_get.="erro_autor=1&";
 			}
 
-			header('Location: inserir_autores.php?'.$retorno_get);
+			header('Location: ../views/inserir_autores.php?'.$retorno_get);
 			//echo "Autor já existe no banco de dados";
 			
 			die();	
 		}
 
-		$sql = " insert into autores(nome) values('$nome_autor')";
+		$sql = " insert into autores(nome_autor) values('$nome_autor')";
 
 		//Executar a query
 		if(mysqli_query($link, $sql)){
-			echo 'Autor cadastrado com sucesso !!!';
+
+			echo "<script>alert('Autor cadastrado com sucesso !!!')</script>";
 		}else{
 			echo 'Erro ao cadastrar o autor !!!';
 		}
@@ -190,7 +191,7 @@ class Administrador{
 
 		//Executar a query
 		if(mysqli_query($link, $sql)){
-			echo 'Gênero cadastrado com sucesso !!!';
+			echo "<script>alert('Gênero cadastrado com sucesso !!!')</script>";
 		}else{
 			echo 'Erro ao cadastrar o gênero !!!';
 		}
@@ -242,7 +243,7 @@ class Administrador{
 
 		//Executar a query
 		if(mysqli_query($link, $sql)){
-			echo 'Editora cadastrada com sucesso !!!';
+			echo "<script>alert('Editora cadastrada com sucesso !!!')</script>";
 		}else{
 			echo 'Erro ao cadastrar a editora !!!';
 		}
@@ -304,7 +305,7 @@ class Administrador{
 
 		//Executar a query
 		if(mysqli_query($link, $sql)){
-			echo 'Livro cadastrado com sucesso !!!';
+			echo "<script>alert('Livro cadastrado com sucesso !!!')</script>";
 		}else{
 			echo 'Erro ao cadastrar o livro !!!';
 		}

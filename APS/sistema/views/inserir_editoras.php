@@ -57,6 +57,13 @@
 
 				});
 
+				$('#btn_inserir_autores_nos_livros').click(function(){
+
+					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_autor_livro.php";
+
+				});
+
+
 				$('#btn_inserir_editoras').click(function(){
 
 					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_editoras.php";
@@ -129,7 +136,7 @@
 	          <ul class="nav navbar-nav navbar-right">
 	          	<li><a href="homeAdm.php"><h3>Home</h3></a></li>
 	          	<li><a href="cadastrar_livro.php"><h3>Cadastrar novos livros</h3></a></li>
-	          	<li><a href="procurar_alunos.php"><h3>Procurar livros</h3></a></li>
+	          	<li><a href="procurar_livros.php"><h3>Procurar livros</h3></a></li>
 	            <li><a href="../controllers/sair.php"><h3>Sair</h3></a></li>
 	          </ul>
 	        </div><!--/.nav-collapse -->
@@ -221,6 +228,9 @@
 							<ul>
 								<li>
 									<button type="button" id="btn_inserir_autores" class="btn btn-warning">Inserir novos autores</button>
+								</li> <br/>
+								<li>
+									<button type="button" id="btn_inserir_autores_nos_livros" class="btn btn-warning">Inserir autores nos livros </button>
 								</li> <br/>
 								<li>
 									<button type="button" id="btn_inserir_categorias" class="btn btn-warning">Inserir novas categorias</button>

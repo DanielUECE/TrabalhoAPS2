@@ -3,8 +3,8 @@
 	//Abrindo a sessão
 	session_start();
 
-	include_once("db.class.php");
-	include_once("administrador.php");
+	include_once("../db.class.php");
+	include_once("../models/administrador.php");
 
 	$objDb = new db();
 	$link = $objDb->conecta_mysql();
@@ -40,7 +40,7 @@
 		<!-- bootstrap - link cdn -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
-		<link rel="stylesheet" href="estilo.css">
+		<link rel="stylesheet" href="../css/estilo.css">
 		
 		<script>
 
@@ -50,19 +50,25 @@
 
 				$('#btn_inserir_categorias').click(function(){
 
-					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/inserir_categorias.php";
+					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_categorias.php";
 
 				});
 
 				$('#btn_inserir_autores').click(function(){
 
-					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/inserir_autores.php";
+					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_autores.php";
+
+				});
+
+				$('#btn_inserir_autores_nos_livros').click(function(){
+
+					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_autor_livro.php";
 
 				});
 
 				$('#btn_inserir_editoras').click(function(){
 
-					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/inserir_editoras.php";
+					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_editoras.php";
 
 				});
 
@@ -125,15 +131,15 @@
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
 	          </button>
-	          <img src="imagens/imagem1.jpg" width=60%/>
+	          <img src="../imagens/imagem1.jpg" width=60%/>
 	        </div>
 	        
 	        <div id="navbar" class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav navbar-right">
 	          	<li><a href="homeAdm.php"><h3>Home</h3></a></li>
 	          	<li><a href="cadastrar_livro.php"><h3>Cadastrar novos livros</h3></a></li>
-	          	<li><a href="procurar_alunos.php"><h3>Procurar livros</h3></a></li>
-	            <li><a href="sair.php"><h3>Sair</h3></a></li>
+	          	<li><a href="procurar_livros.php"><h3>Procurar livros</h3></a></li>
+	            <li><a href="../controllers/sair.php"><h3>Sair</h3></a></li>
 	          </ul>
 	        </div><!--/.nav-collapse -->
 	      </div>
@@ -187,7 +193,7 @@
 
 	    		<h3>Cadastro de autores.</h3>
 	    		<br />
-	    		<form method="post" action="" id="formCadastrarse">
+	    		<form method="post" action="../controllers/inserir_autoresController.php" id="formCadastrarse">
 					<div class="form-group">
 						<input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" required="requiored">
 					</div>
@@ -220,6 +226,9 @@
 							<ul>
 								<li>
 									<button type="button" id="btn_inserir_autores" class="btn btn-warning">Inserir novos autores</button>
+								</li> <br/>
+								<li>
+									<button type="button" id="btn_inserir_autores_nos_livros" class="btn btn-warning">Inserir autores nos livros </button>
 								</li> <br/>
 								<li>
 									<button type="button" id="btn_inserir_categorias" class="btn btn-warning">Inserir novas categorias</button>
