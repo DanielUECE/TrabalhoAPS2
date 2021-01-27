@@ -7,17 +7,17 @@ session_start();
 		header('Location: index.php?erro=1');
 	}
 	
-	//echo $_SESSION['id'];
+
 	require_once('../db.class.php');
 
-	//$nome_livro = $_POST['nome_livro'];  // post da pesquisa do usuário
+	$nome_livro = $_POST['nome_livro'];  // post da pesquisa do usuário
 
 
 	$objDb = new db();
 	$link = $objDb->conecta_mysql(); 
 
 
-	$sql = "SELECT l.*, c.genero, e.nome FROM livros AS l,  categoria AS c, editoras AS e WHERE l.id_categoria = c.id and l.id_editora = e.id  ";
+	$sql = "SELECT l.*, c.genero, e.nome FROM livros AS l,  categoria AS c, editoras AS e WHERE l.id_categoria = c.id and l.id_editora = e.id and (l.titulo like '%$nome_livro%' or e.nome like '%$nome_livro%' or c.genero like '%$nome_livro%') ";
 
 
 	if($resultado_id = mysqli_query($link, $sql)){
@@ -29,7 +29,7 @@ session_start();
 			//echo $registro['nome_autor'];
 			
 			$id_livro = $registro['id'];
-			//echo $id_livro;
+			echo $id_livro;
 			//Procurando os autores de cada livro
 			$sql2 = "SELECT la.*, a.nome_autor FROM livros AS l, autores AS a, livro_autor AS la WHERE la.id_livro = '$id_livro' and la.id_autor = a.id ";
 
@@ -70,9 +70,8 @@ session_start();
  					
 		  				}
 
-		  			}	
-		  			echo '<br/><br/>';			     
-					echo '<button class="btn btn btn-success btn-inserir-carrinho" data-id_livro="'.$registro['id'].'" id="btn-inserir-carrinho'.$registro['id'].'"">Adicionar no carrinho</button>'; 
+		  			}				     
+						 
 					echo '<p class="list-group-item-text pull-right">';
 
 
@@ -90,6 +89,16 @@ session_start();
 	} else {
 		echo 'Erro na consulta dos livros no banco de dados.';
 	}
+
+	
+
+
+
+
+
+
+
+
 
 
 

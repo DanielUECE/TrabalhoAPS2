@@ -90,29 +90,7 @@ session_start();
 		echo 'Erro na consulta dos livros no banco de dados.';
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	
 
 
 
