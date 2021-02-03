@@ -36,7 +36,7 @@ session_start();
 
 			echo '<a href"#" class="list-group-item">';
 
-					echo ' <strong><img src="'.$registro['capa'].'"></strong> </br>
+					echo ' <strong><img src="../fotos/'.$registro['capa'].'"></strong> </br></br>
 						  <strong>Título: '.$registro['titulo'].'</strong> </br>
 						  <strong>Preço: '.$registro['preco'].'</strong> </br> 
 						  <strong>Editora: '.$registro['nome'].'</strong> </br>
@@ -72,7 +72,7 @@ session_start();
 
 		  			}	
 		  			echo '<br/><br/>';			     
-					echo '<button class="btn btn btn-success btn-inserir-carrinho" data-id_livro="'.$registro['id'].'" id="btn-inserir-carrinho'.$registro['id'].'"">Adicionar no carrinho</button>'; 
+					echo '<button class="btn btn btn-primary btn-inserir-carrinho" data-id_livro="'.$registro['id'].'" id="btn-inserir-carrinho'.$registro['id'].'"">Adicionar no carrinho</button>'; 
 					echo '<p class="list-group-item-text pull-right">';
 
 

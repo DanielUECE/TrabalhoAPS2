@@ -167,7 +167,7 @@
 	          <ul class="nav navbar-nav navbar-right">
 	          	<li><a href="home.php"><h3>Home</h3></a></li>
 	          	<li><a href="pesquisar_livros_por_categoria.php"><h3>Pesquisar livros por categoria</h3></a></li>
-	          	<li><a href="procurar_alunos.php"><h3>Visualizar Carrinho</h3></a></li>
+	          	<li><a href="visualizarCarrinho.php"><h3>Visualizar Carrinho</h3></a></li>
 	            <li><a href="../controllers/sair.php"><h3>Sair</h3></a></li>
 	          </ul>
 	        </div><!--/.nav-collapse -->

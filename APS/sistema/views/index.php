@@ -151,7 +151,7 @@
 
 	      <!-- Main component for a primary marketing message or call to action -->
 	      <div class="jumbotron cor-fundo">
-	        <h2 id="subtitulo">SISTEMA DE COMPRA DE LIVROS ONLINE</h2>
+	        <h2 id="subtitulo">SISTEMA DE COMPRA DE LIVROS</h2>
 	        <!--<img src="imagens/imagem2.jpg" width= 60%/>-->
 	        <h3 id="subtitulo"></h3>
 	        <p></p>

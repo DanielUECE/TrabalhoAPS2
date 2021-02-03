@@ -253,12 +253,26 @@ class Administrador{
 
 
 
-	public function cadastrar_livro($dado){
+	public function cadastrar_livro($dado, $files){
 		$this->objLivro->getTitulo = $dado['titulo'];
 		$this->objLivro->getPreco = $dado['preco'];
 		$this->objLivro->getCategoria = $dado['categoria'];
 		$this->objLivro->getEditora = $dado['editora'];
-		$this->objLivro->getCapa = $dado['capa'];
+		$this->objLivro->getCapa = $files['capa']['name'];
+
+
+		// Upload das imagens
+		$arquivo_tmp = $_FILES['capa']['tmp_name'];
+		$destino = "../fotos/";
+
+		$movefile = move_uploaded_file($arquivo_tmp , $destino .$this->objLivro->getCapa);
+
+		/*if($movefile){
+			echo "imagem inserida";
+		}else{
+			echo "erro ao fazer o upload da imagem";
+		}*/
+
 
 
 		$titulo_livro = $this->objLivro->getTitulo;

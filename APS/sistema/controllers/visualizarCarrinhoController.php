@@ -7,17 +7,19 @@ session_start();
 		header('Location: index.php?erro=1');
 	}
 	
-
+	//echo $_SESSION['id'];
 	require_once('../db.class.php');
 
-	$nome_livro = $_POST['nome_livro'];  // post da pesquisa do usuário
+	//$nome_livro = $_POST['nome_livro'];  // post da pesquisa do usuário
 
 
 	$objDb = new db();
 	$link = $objDb->conecta_mysql(); 
 
+	$id_usuario = $_SESSION['id'];
 
-	$sql = "SELECT l.*, c.genero, e.nome FROM livros AS l,  categoria AS c, editoras AS e WHERE l.id_categoria = c.id and l.id_editora = e.id and (l.titulo like '%$nome_livro%' or e.nome like '%$nome_livro%' or c.genero like '%$nome_livro%') ";
+
+	$sql = "SELECT l.*, c.genero, e.nome FROM livros AS l, categoria AS c, editoras AS e, carrinho AS ca WHERE l.id_categoria = c.id and l.id_editora = e.id and ca.id_usuario = '$id_usuario' and ca.id_livro = l.id ";  // Faz uma busca pelos livros inseridos no carrinho do usuário da sessão.
 
 
 	if($resultado_id = mysqli_query($link, $sql)){
@@ -29,7 +31,7 @@ session_start();
 			//echo $registro['nome_autor'];
 			
 			$id_livro = $registro['id'];
-			echo $id_livro;
+			//echo $id_livro;
 			//Procurando os autores de cada livro
 			$sql2 = "SELECT la.*, a.nome_autor FROM livros AS l, autores AS a, livro_autor AS la WHERE la.id_livro = '$id_livro' and la.id_autor = a.id ";
 
@@ -70,8 +72,9 @@ session_start();
  					
 		  				}
 
-		  			}				     
-						 
+		  			}	
+		  			echo '<br/><br/>';			     
+					echo '<button class="btn btn btn-danger btn-remover-carrinho" data-id_livro="'.$registro['id'].'" id="btn-remover-carrinho'.$registro['id'].'"">Remover do carrinho</button>'; 
 					echo '<p class="list-group-item-text pull-right">';
 
 
@@ -89,16 +92,6 @@ session_start();
 	} else {
 		echo 'Erro na consulta dos livros no banco de dados.';
 	}
-
-	
-
-
-
-
-
-
-
-
 
 
 

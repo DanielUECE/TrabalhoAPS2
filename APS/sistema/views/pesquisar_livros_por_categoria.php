@@ -177,7 +177,7 @@
 	          <ul class="nav navbar-nav navbar-right">
 	          	<li><a href="home.php"><h3>Home</h3></a></li>
 	          	<li><a href="pesquisar_livros_por_categoria.php"><h3>Pesquisar livros por categoria</h3></a></li>
-	          	<li><a href="procurar_livros.php"><h3>Visualizar carrinho</h3></a></li>
+	          	<li><a href="visualizarCarrinho.php"><h3>Visualizar carrinho</h3></a></li>
 	            <li><a href="../controllers/sair.php"><h3>Sair</h3></a></li>
 	          </ul>
 	        </div><!--/.nav-collapse -->
@@ -264,9 +264,9 @@
 				<div class="col-md-3">
 				
 					
-						
+												
 
-						<table class="table table-condensed">
+						<!--<table class="table table-condensed">
 							<ul>
 								<li>
 									<button type="button" id="btn_inserir_autores" class="btn btn-warning">Inserir novos autores</button>
@@ -281,7 +281,7 @@
 									<button type="button" id="btn_inserir_editoras" class="btn btn-warning">Inserir novas editoras</button>
 								</li>
 							</ul>
-						</table>
+						</table>-->
 						
 						
 						<!--<h3 class="active">Comunidades</h3>-->

@@ -191,7 +191,7 @@
 
 	    		<h3>Cadastro de livros</h3>
 	    		<br />
-	    		<form method="post" action="../controllers/cadastrar_livroController.php" id="formCadastrarse">
+	    		<form method="post" action="../controllers/cadastrar_livroController.php" id="formCadastrarse" enctype="multipart/form-data">
 					<div class="form-group">
 						<input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título*" required="requiored">
 					</div>
@@ -265,7 +265,7 @@
 
 					<div class="form-group">
 						<h1 class="form-control">Capa do livro: *</h1>
-						<input type="file"  id="capa" name="capa" placeholder="Capa do livro" required="requiored">
+						<input type="file" id="capa" name="capa" placeholder="Capa do livro" required="requiored">
 					</div>
 
 					<div class="form-group">
@@ -280,8 +280,10 @@
 
 
 
-					<button type="submit" name="btCadastrar_livro" class="btn btn-primary form-control">Cadastrar</button>
+					<button type="submit" value="upload" name="btCadastrar_livro" class="btn btn-primary form-control">Cadastrar</button>
 				</form>
+
+
 
 	    
 	    		 	    		
