@@ -1,14 +1,14 @@
 <?php
-/*
+
 	//Abrindo a sessão
 	session_start();
 
-	include_once("db.class.php");
+	include_once("../db.class.php");
 	//include_once("administrador.php");
 
 	$objDb = new db();
 	$link = $objDb->conecta_mysql();
-*/
+
 	?>
 <!DOCTYPE html>
 <html lang="pt">
@@ -34,6 +34,81 @@
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
 </head><!--/head-->
 
+<script>
+
+//Validação dos campos
+//Verificando se o documento foi carregado
+$(document).ready( function(){
+
+	$('#btn_inserir_categorias').click(function(){
+
+		window.location.href = "http://localhost/APS/sistema/views/inserir_categorias.php";
+
+	});
+
+	$('#btn_inserir_autores').click(function(){
+
+		window.location.href = "http://localhost/Livraria1/sistema/views/inserir_autores.php";
+
+	});
+
+	$('#btn_inserir_autores_nos_livros').click(function(){
+
+		window.location.href = "http://localhost/Livraria1/sistema/views/inserir_autor_livro.php";
+
+	});
+
+	$('#btn_inserir_editoras').click(function(){
+
+		window.location.href = "http://localhost/Livraria1/sistema/views/inserir_editoras.php";
+
+	});
+
+	$('#pagina_inicial').click(function(){
+		
+		// Direcionando o aluno para a página inicial.
+		window.location.href = "http://localhost/UECEBOOK/uecebook/pagina_inicial.php";
+	});
+
+	$('#home').click(function(){
+
+		// Direcionando o aluno para sua página de perfil.
+		window.location.href = "http://localhost/UECEBOOK/uecebook/home.php";
+	});
+
+	// Direcionando o aluno para uma determinada comunidade
+	$('#1').click(function(){
+
+		window.location.href = "http://localhost/UECEBOOK/uecebook/comunidade_ced.php";
+		
+	});
+
+	$('#2').click(function(){
+
+		window.location.href = "http://localhost/UECEBOOK/uecebook/comunidade_cct.php";
+
+	});
+
+	$('#3').click(function(){
+
+		window.location.href = "http://localhost/UECEBOOK/uecebook/comunidade_ch.php";
+
+	});
+
+	$('#4').click(function(){
+
+		window.location.href = "http://localhost/UECEBOOK/uecebook/comunidade_cesa.php";
+
+	});
+
+	$('#5').click(function(){
+
+		window.location.href = "http://localhost/UECEBOOK/uecebook/comunidade_ccs.php";
+
+	});
+});
+</script>
+
 <body>
 	
 		
@@ -52,7 +127,10 @@
 								<li><a href=""><i class="fa fa-user"></i> Teste</a></li>
 								<li><a href=""><i class="fa fa-star"></i> Teste</a></li>
 								<li><a href="carinho.php"><i class="fa fa-shopping-cart"></i> Carrinho</a></li>
-								<li><a href="login.php"><i class="fa fa-lock"></i> Login</a></li>
+								<li class="dropdown"><a href="#"><?=$_SESSION['nome']?><i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+										<li><a href="../controllers/sair.php">Sair</a></li> 
+                                    </ul>
 							</ul>
 						</div>
 					</div>
@@ -74,7 +152,7 @@
 						</div>
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="index-adm.php" class="active">Inicio</a></li>
+								<li><a href="homeAdm.php" class="active">Inicio</a></li>
 								<li class="dropdown"><a href="#">Dropdown<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
 										<li><a href="product-details.html">Product Details</a></li> 
@@ -127,8 +205,8 @@
 								<div id="autor" class="panel-collapse collapse">
 									<div class="panel-body">
 										<ul>
-											<li><a href="cadastrar-autor.php">cadastrar</a></li>
-											<li><a href="visualizar-autor.php">visualizar</a></li>
+											<li><a href="inserir_autores.php">cadastrar</a></li>
+											<li><a href="visualizar_autores.php">visualizar</a></li>
 											<li><a href="#">Editar Autores</a></li>
 										</ul>
 									</div>
@@ -146,7 +224,7 @@
 								<div id="categoria" class="panel-collapse collapse">
 									<div class="panel-body">
 										<ul>
-											<li><a href="cadastrar-categoria.php">Cadastrar</a></li>
+											<li><a href="inserir_categorias.php">Cadastrar</a></li>
 											<li><a href="#">Visualizar</a></li>
 											<li><a href="#">Editar</a></li>
 										</ul>
@@ -193,6 +271,25 @@
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordian" href="#editora">
+											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
+											Editora
+										</a>
+									</h4>
+								</div>
+								<div id="editora" class="panel-collapse collapse">
+									<div class="panel-body">
+										<ul>
+											<li><a href="inserir_editoras.php">Cadastrar</a></li>
+											<li><a href="#">Visualizar</a></li>
+											<li><a href="#">Editar</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
 									<h4 class="panel-title"><a href="cadastrar-livro.php">Livros</a></h4>
 								</div>
 							</div>
@@ -201,11 +298,9 @@
 				</div>
 				<div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
-						<h2 class="title text-center"></h2>
-							<div class="col-md-4">
-
-					<h3>Cadastro de livros</h3>
-						<br />
+						
+						<div class="col-md-4">
+						<h2 class="title text-center">Cadastro de livros</h2>
 						<form method="post" action="../controllers/cadastrar_livroController.php" id="formCadastrarse">
 							<div class="form-group">
 								<input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título*" required="requiored">
@@ -250,7 +345,7 @@
 										while($row_categorias = mysqli_fetch_assoc($result_categorias)){
 											?>
 																		<!--Ele passa no post o value, ou seja o id da categoria-->
-											<option value="<?php echo $row_categorias['id']; ?>"><?php echo $row_categorias['genero']; ?>
+											<option value="<?php echo $row_categorias['id_categoria']; ?>"><?php echo $row_categorias['genero']; ?>
 												
 											</option> <?php
 										}
@@ -269,7 +364,25 @@
 										while($row_editoras = mysqli_fetch_assoc($result_editoras)){
 											?>
 																		<!--Ele passa no post o value, ou seja o id da categoria-->
-											<option value="<?php echo $row_editoras['id']; ?>"><?php echo $row_editoras['nome']; ?>
+											<option value="<?php echo $row_editoras['id_editora']; ?>"><?php echo $row_editoras['nome']; ?>
+												
+											</option> <?php
+										}
+									?>				
+								</select>
+							</div>
+							<!--A editora é selecionada a partir das editoras do banco de dados -->
+							<div class="form-group">
+								<select type="text" class="form-control" name="estado" id="estado">
+									<option>Selecione o estado do livro*</option>	
+									<?php
+										$sql = " select * from estado";
+										$result_estado = mysqli_query($link, $sql);
+										//$lista_cursos = mysqli_fetch_array($result_cursos);
+										while($row_estado = mysqli_fetch_assoc($result_estado)){
+											?>
+																		<!--Ele passa no post o value, ou seja o id da categoria-->
+											<option value="<?php echo $row_estado['id_estado']; ?>"><?php echo $row_estado['descricao']; ?>
 												
 											</option> <?php
 										}
@@ -297,12 +410,7 @@
 
 							<button type="submit" name="btCadastrar_livro" class="btn btn-primary form-control">Cadastrar</button>
 						</form>
-
-
-										
 						</div>
-
-						
 					</div><!--features_items-->
 					
 				</div>

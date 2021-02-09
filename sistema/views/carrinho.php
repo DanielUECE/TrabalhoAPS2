@@ -39,7 +39,10 @@
 							<li><a href=""><i class="fa fa-user"></i> Teste</a></li>
 							<li><a href=""><i class="fa fa-star"></i> Teste</a></li>
 							<li><a href="carinho.php"><i class="fa fa-shopping-cart"></i> Carrinho</a></li>
-							<li><a href="login.php"><i class="fa fa-lock"></i> Login</a></li>
+							<li class="dropdown"><a href="#"><?=$_SESSION['nome']?><i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+										<li><a href="../controllers/sair.php">Sair</a></li> 
+                                    </ul>
 						</ul>
 					</div>
 				</div>

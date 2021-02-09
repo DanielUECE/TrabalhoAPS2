@@ -3,10 +3,10 @@
 
 require_once('../db.class.php');
 
-require_once('autor.php');
-require_once('categoria.php');
-require_once('livro.php');
-require_once('editora.php');
+require_once('../models/autor.php');
+require_once('../models/categoria.php');
+require_once('../models/livro.php');
+require_once('../models/editora.php');
 
 class Administrador{
 

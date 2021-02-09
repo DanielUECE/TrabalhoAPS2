@@ -52,78 +52,87 @@
 </head><!--/head-->
 <script>
 
-    //Validação dos campos
-    //Verificando se o documento foi carregado
-    $(document).ready( function(){
+//Validação dos campos
+//Verificando se o documento foi carregado
+$(document).ready( function(){
 
-        $('#btn_inserir_categorias').click(function(){
+	$('#pagina_inicial').click(function(){
+		
+		// Direcionando o aluno para a página inicial.
+		window.location.href = "http://localhost/UECEBOOK/uecebook/pagina_inicial.php";
+	});
 
-            window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_categorias.php";
+	$('#home').click(function(){
 
-        });
+		// Direcionando o aluno para sua página de perfil.
+		window.location.href = "http://localhost/UECEBOOK/uecebook/home.php";
+	});
 
-        $('#btn_inserir_autores').click(function(){
+	// Direcionando o aluno para uma determinada comunidade
+	/*$('#1').click(function(){
 
-            window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_autores.php";
+		window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/romance.php";
+		
+	});*/
 
-        });
+	$('#2').click(function(){
 
-        $('#btn_inserir_autores_nos_livros').click(function(){
+		window.location.href = "http://localhost/UECEBOOK/uecebook/comunidade_cct.php";
 
-            window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_autor_livro.php";
+	});
 
-        });
+	$('#3').click(function(){
 
-        $('#btn_inserir_editoras').click(function(){
+		window.location.href = "http://localhost/UECEBOOK/uecebook/comunidade_ch.php";
 
-            window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_editoras.php";
+	});
 
-        });
+	$('#4').click(function(){
 
-        $('#pagina_inicial').click(function(){
-            
-            // Direcionando o aluno para a página inicial.
-            window.location.href = "http://localhost/UECEBOOK/uecebook/pagina_inicial.php";
-        });
+		window.location.href = "http://localhost/UECEBOOK/uecebook/comunidade_cesa.php";
 
-        $('#home').click(function(){
+	});
 
-            // Direcionando o aluno para sua página de perfil.
-            window.location.href = "http://localhost/UECEBOOK/uecebook/home.php";
-        });
+	$('#5').click(function(){
 
-        // Direcionando o aluno para uma determinada comunidade
-        $('#1').click(function(){
+		window.location.href = "http://localhost/UECEBOOK/uecebook/comunidade_ccs.php";
 
-            window.location.href = "http://localhost/UECEBOOK/uecebook/comunidade_ced.php";
-            
-        });
+	});
 
-        $('#2').click(function(){
+	$.ajax({
 
-            window.location.href = "http://localhost/UECEBOOK/uecebook/comunidade_cct.php";
+				url: '../controllers/visualizar_autoresController.php',
+				method: 'post', 
+				//data: $('#form_procurar_livros').serialize(),
+				success: function(data){
+					//$('#livros').html(data);
+					$('#autores').html(data);
+				
+					$('.btn-remover-carrinho').click(function(){
+						//url: '../controllers/inserirCarrinho.php'
 
-        });
+					//	var id_livro = $(this).data('id_livro');
+						var id_livro = $(this).data('id_autor');
+						
 
-        $('#3').click(function(){
+						$.ajax({
+							url: '../controllers/visualizar_autoresController.php',
+							method: 'post',
+						
+							//	data: {id_livro_carrinho : id_livro},
+							data: {id_autor : id_autor},
+							success: function(data){
+								$('#total').html(data);
+								//alert('Livro inserido no carrinho com sucesso')
+							}
+						});
+						//window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_autor_livro.php";
+					});
+				}
 
-            window.location.href = "http://localhost/UECEBOOK/uecebook/comunidade_ch.php";
-
-        });
-
-        $('#4').click(function(){
-
-            window.location.href = "http://localhost/UECEBOOK/uecebook/comunidade_cesa.php";
-
-        });
-
-        $('#5').click(function(){
-
-            window.location.href = "http://localhost/UECEBOOK/uecebook/comunidade_ccs.php";
-
-        });
-    });
-    </script>
+			});
+});
+</script>
 <body>
 	
 		
@@ -294,7 +303,8 @@
 	    			endif;
 	    		?>
 				<div class="col-sm-7 padding-right">
-					<div class="features_items"><!--features_items-->
+					<!--<div class="features_items">features_items-->
+					<div id = "autores" class = "features-items"><!--features_items-->
 						<h2 class="title text-center">Autores Cadastrados</h2>
 
 						<table class="table table-hover">
@@ -302,32 +312,25 @@
 								<tr>
 								<th scope="col">Id</th>
 								<th scope="col">Nome</th>
-							<!--	<th scope="col">Último</th>
-								<th scope="col">Nickname</th>   -->
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 								<th scope="row">1</th>
 								<td>Mark</td>
-							<!--	<td>Otto</td>
-								<td>@mdo</td> -->
 								</tr>
 								<tr>
 								<th scope="row">2</th>
 								<td>Jacob</td>
-							<!--	<td>Thornton</td>
-								<td>@fat</td> -->
 								</tr>
 								<tr>
 								<th scope="row">3</th>
 								<td colspan="2">Larry the Bird</td>
-							<!--	<td>@twitter</td> -->
 								</tr>
 							</tbody>
 							</table>
 						
-					</div><!--features_items-->
+					</div><!--features_items
 					
 				</div>
 			</div>

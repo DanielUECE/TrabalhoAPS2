@@ -163,25 +163,37 @@
 				<div class="col-sm-4">
 					<div class="signup-form"><!--sign up form-->
 						<h2>Cadaste-se!</h2>
-						<form action="#">
-							<input type="Text" placeholder="Nome"/>
-							<input type="Email" placeholder="Email"/>
-							<input type="Password" placeholder="Senha"/>
-							<input type="Data Nascimento" placeholder="Data Nascimento"/>
-							<input type="Endereço" placeholder="Endereço"/>
-							<button type="Submit" class="btn btn-default">Cadastrar</button>
-						</form>
+						<form method="post" action="../controllers/cadastroUsuarioController.php" id="formCadastrarse">
+					<div class="form-group">
+						<input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" required="requiored">
+					</div>
+
+					<div class="form-group">
+						<input type="date" class="form-control" id="data_nascimento" name="data_nascimento" placeholder="Data de Nascimento"  required="requiored">
+					</div>
+
+					<div class="form-group">
+						<input type="email" class="form-control" id="email" name="email" placeholder="Email" required="requiored">
+					</div>
+
+					<div class="form-group">
+						<input type="text" class="form-control" id="endereco" name="endereco" placeholder="Endereço" required="requiored">
+					</div>
+					
+					<div class="form-group">
+						<input type="password" class="form-control" id="senha" name="senha" placeholder="Senha" required="requiored">
+					</div>
+
+					
+					
+					<button type="submit" name="btCadastrar" class="btn btn-primary form-control">Inscreva-se</button>
+				</form>
 					</div><!--/sign up form-->
 				</div>
 			</div>
 		</div>
 	</section><!--/form-->
 	
-	
-
-	
-
-  
     <script src="../../js/jquery.js"></script>
 	<script src="../../js/price-range.js"></script>
     <script src="../../js/jquery.scrollUp.min.js"></script>

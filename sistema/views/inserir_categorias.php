@@ -145,7 +145,10 @@ $(document).ready( function(){
 								<li><a href=""><i class="fa fa-user"></i> Teste</a></li>
 								<li><a href=""><i class="fa fa-star"></i> Teste</a></li>
 								<li><a href="carrinho.php"><i class="fa fa-shopping-cart"></i> Carrinho</a></li>
-								<li><a href="login.php"><i class="fa fa-lock"></i> Login</a></li>
+								<li class="dropdown"><a href="#"><?=$_SESSION['nome']?><i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+										<li><a href="../controllers/sair.php">Sair</a></li> 
+                                    </ul>																					
 							</ul>
 						</div>
 					</div>
@@ -220,7 +223,7 @@ $(document).ready( function(){
 									<div class="panel-body">
 										<ul>
 											<li><a href="inserir_autores.php">cadastrar</a></li>
-											<li><a href="visualizar-autor.php">visualizar</a></li>
+											<li><a href="visualizar_autores.php">visualizar</a></li>
 											<li><a href="#">Editar Autores</a></li>
 										</ul>
 									</div>
@@ -277,6 +280,25 @@ $(document).ready( function(){
 									<div class="panel-body">
 										<ul>
 											<li><a href="cadastrar-livro.php">Cadastrar</a></li>
+											<li><a href="#">Visualizar</a></li>
+											<li><a href="#">Editar</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordian" href="#editora">
+											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
+											Editora
+										</a>
+									</h4>
+								</div>
+								<div id="editora" class="panel-collapse collapse">
+									<div class="panel-body">
+										<ul>
+											<li><a href="inserir_editoras.php">Cadastrar</a></li>
 											<li><a href="#">Visualizar</a></li>
 											<li><a href="#">Editar</a></li>
 										</ul>
