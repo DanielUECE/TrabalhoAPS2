@@ -67,7 +67,7 @@ class Administrador{
 
 		$link = $this->objDb->conecta_mysql();
 
-		// Select para buscar o nome e o email do usuario.
+		// Select para buscar o nome e o email do administrador.
 		$sql = " SELECT id, nome, email FROM administrador WHERE nome = '$this->nome' AND senha = '$this->senha' ";
 
 		$resultado_id = mysqli_query($link, $sql);

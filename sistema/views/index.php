@@ -55,7 +55,7 @@
 		<div class="header-bottom"><!--header-bottom-->
 			<div class="container">
 				<div class="row">
-					<div class="col-sm-9">
+					<div class="col-sm-8">
 						<div class="navbar-header">
 							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 								<span class="sr-only">Toggle navigation</span>
@@ -81,14 +81,23 @@
 						</div>
 					</div>
 					<div class="col-sm-3">
-						<div class="search_box pull-right">
-							<!--<input type="text" placeholder="Procurar"/> -->
-							
 
+						<!-- Div da caixa de pesquisa ao conectar com o banco verificar se a função não está atrelada a esta div	
+							<div class="panel panel-default"> -->
+								<div class="panel-body">
+									<form id="form_procurar_livros" class="input-group">
+										<input type="text" id="nome_livro" name="nome_livro" class="form-control" placeholder="Pesquisar" maxlength="200">
+										<span class="input-group-btn">
+											<button class="btn btn-default" id="btn_procurar_livros" type="button">
+												Procurar
+											</button>
+										</span>
+									</form>
+								</div>
+						<!--</div>-->
+							<div id="livros" class="list-group"></div>  <!--Essa tag conterá a listagem de livros-->
 						</div>
 					</div>
-				</div>
-			</div>
 		</div><!--/header-bottom-->
 	</header><!--/header-->
 	

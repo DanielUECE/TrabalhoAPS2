@@ -36,7 +36,7 @@
 				<div class="row">
 					<div class="col-md-4 clearfix">
 						<div class="logo pull-left">
-						<a href="index-user.php"><img src="../images/home/icone-livraria.png"> <span>Livraria Aps </span> </a>
+						<a href="homeAdm.php"><img src="../images/home/icone-livraria.png"> <span>Livraria Aps </span> </a>
 						</div>
 
 					</div>
@@ -182,7 +182,8 @@
 								<div id="livro" class="panel-collapse collapse">
 									<div class="panel-body">
 										<ul>
-											<li><a href="cadastrar-livro.php">Cadastrar</a></li>
+											<li><a href="cadastrar_livro.php">Cadastrar Livro</a></li>
+											<li><a href="inserir_autor_livro.php">Cadastrar Autor no Livro</a></li>
 											<li><a href="#">Visualizar</a></li>
 											<li><a href="#">Editar</a></li>
 										</ul>
@@ -210,7 +211,25 @@
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="cadastrar-livro.php">Livros</a></h4>
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordian" href="#entrega">
+											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
+											Status Entrega
+										</a>
+									</h4>
+								</div>
+								<div id="entrega" class="panel-collapse collapse">
+									<div class="panel-body">
+										<ul>
+											<li><a href="status_entrega.php">Mudar Status</a></li>
+										</ul>
+									</div>
+								</div>
+								
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title"><a href="cadastrar_livro.php">Livros</a></h4>
 								</div>
 							</div>
 						</div><!--/category-products-->

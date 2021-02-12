@@ -179,11 +179,10 @@ class Usuario{
 		$this->nome = $dado['usuario'];
 		$this->senha = md5($dado['senha']);
 
-
 		$link = $this->objDb->conecta_mysql();
 
 		// Select para buscar o nome e o email do usuario.
-		$sql = " SELECT id, nome, email FROM usuarios WHERE nome = '$this->nome' AND senha = '$this->senha' ";
+		$sql = " SELECT id_usuario, nome, email FROM usuarios WHERE nome = '$this->nome' AND senha = '$this->senha' ";
 
 
 		$resultado_id = mysqli_query($link, $sql);
@@ -196,19 +195,16 @@ class Usuario{
 			
 			if(isset($dados_usuario['nome'])){
 
-				$_SESSION['id'] = $dados_usuario['id'];
+				$_SESSION['id_usuario'] = $dados_usuario['id_usuario'];
 				$_SESSION['nome'] = $dados_usuario['nome'];
 				$_SESSION['email'] = $dados_usuario['email'];
 
 
-				header('Location: ../views/home.php');
+				header('Location: ../views/index.php');
 			
 			} else{
-				header('Location: ../index.php?erro=1');
+				header('Location: ../views/404.php');
 			}
-
-
-
 		} else{
 			echo 'Erro na execução da consulta !!';
 		}

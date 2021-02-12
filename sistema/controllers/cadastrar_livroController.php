@@ -31,11 +31,4 @@
 	if(isset($dados)){
 		$objAdm->cadastrar_livro($dados, $files);
 	}
-
-
-
-
-
-
-
 ?>

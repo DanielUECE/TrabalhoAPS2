@@ -67,7 +67,7 @@
 				<div class="row">
 					<div class="col-md-4 clearfix">
 						<div class="logo pull-left">
-						<a href="index-user.php"><img src="../images/home/icone-livraria.png"> <span>Livraria Aps </span> </a>
+						<a href="index.php"><img src="../images/home/icone-livraria.png"> <span>Livraria Aps </span> </a>
 						</div>
 
 					</div>
@@ -99,7 +99,7 @@
 						</div>
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="index-user.php	">Home</a></li>
+								<li><a href="homeUser.php	">Home</a></li>
 								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="shop.html">Produtos</a></li>
@@ -120,12 +120,7 @@
 							</ul>
 						</div>
 					</div>
-					<div class="col-sm-3">
-						<div class="search_box pull-right">
-							<input type="text" placeholder="Search"/>
-						</div>
 					</div>
-				</div>
 			</div>
 		</div><!--/header-bottom-->
 	</header>
