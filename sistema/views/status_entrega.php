@@ -2,7 +2,10 @@
 
 	//Abrindo a sessão
 	session_start();
+	include_once("../db.class.php");
 
+	$objDb = new db();
+	$link = $objDb->conecta_mysql();
 ?>
 <!DOCTYPE html>
 <html lang="pt">
@@ -29,8 +32,6 @@
 </head><!--/head-->
 
 <body>
-	
-		
 		<div class="header-middle"><!--header-middle-->
 			<div class="container">
 				<div class="row">
@@ -238,8 +239,43 @@
 				<div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">Status Entrega</h2>
-						
-						
+								<div class="col-sm-5">		
+									<!--Busca no banco as cpompras disponiveis -->
+									<div class="form-group">
+										<select type="text" class="form-control" name="status_entrega" id="status_entrega">
+											<option>Compra</option>	
+											<?php
+												$sql = " select * from status_entrega";
+												$result_status = mysqli_query($link, $sql);
+												while($row_status = mysqli_fetch_assoc($result_status)){
+													?>
+													<!--Ele passa no post o value, ou seja o id da categoria-->
+													<option value="<?php echo $row_status['id_entrega']; ?>"><?php echo $row_status['descricao']; ?>
+														
+													</option> <?php
+												}
+											?>				
+										</select>
+									</div>
+									<!--Busca no banco os status de entrega disponíveis -->
+									<div class="form-group">
+										<select type="text" class="form-control" name="status_entrega" id="status_entrega">
+											<option>status atual</option>	
+											<?php
+												$sql = " select * from status_entrega";
+												$result_status = mysqli_query($link, $sql);
+												while($row_status = mysqli_fetch_assoc($result_status)){
+													?>
+													<!--Ele passa no post o value, ou seja o id da categoria-->
+													<option value="<?php echo $row_status['id_entrega']; ?>"><?php echo $row_status['descricao']; ?>
+														
+													</option> <?php
+												}
+											?>				
+										</select>
+									</div>
+									<button type="submit" name="btCadastrar_livro" class="btn btn-primary form-control">Cadastrar</button>
+								</div>
 						
 						
 					</div><!--features_items-->

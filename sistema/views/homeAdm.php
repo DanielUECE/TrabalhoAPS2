@@ -72,25 +72,25 @@
 							</button>
 						</div>
 						<div class="mainmenu pull-left">
-							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="homeAdm.php" class="active">Inicio</a></li>
-								<li class="dropdown"><a href="#">Produtos<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-										<li><a href="product-details.html">Product Details</a></li> 
-										<li><a href="checkout.html">Produto1</a></li> 
-										<li><a href="cart.html">Produto2</a></li> 
-                                    </ul>
-                                </li> 
-								<li><a href="404.html">404</a></li>
-								<li><a href="contact-us.html">Teste</a></li>
-								<li><a href="contact-us.html">Teste</a></li>
-							</ul>
+						
 						</div>
 					</div>
 					<div class="col-sm-3">
-						<div class="search_box pull-right">
-							<input type="text" placeholder="Search"/>
+
+					<!-- Div da caixa de pesquisa ao conectar com o banco verificar se a função não está atrelada a esta div -->	
+						<div class="panel panel-default"> 
+							<div class="panel-body">
+								<form id="form_procurar_livros" class="input-group">
+									<input type="text" id="nome_livro" name="nome_livro" class="form-control" placeholder="Pesquisar" maxlength="200">
+									<span class="input-group-btn">
+										<button class="btn btn-default" id="btn_procurar_livros" type="button">
+											Procurar
+										</button>
+									</span>
+								</form>
+							</div>
 						</div>
+					</div>
 					</div>
 				</div>
 			</div>
@@ -163,7 +163,7 @@
 								<div id="relatorio" class="panel-collapse collapse">
 									<div class="panel-body">
 										<ul>
-											<li><a href="#">Vendas</a></li>
+											<li><a href="relatorio_vendas.php">Vendas</a></li>
 											<li><a href="#">Usuários</a></li>
 										</ul>
 									</div>

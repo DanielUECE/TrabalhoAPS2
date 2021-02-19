@@ -256,16 +256,33 @@ class Administrador{
 
 
 
-	public function cadastrar_livro($dado){
+	public function cadastrar_livro($dado, $files){
 		$this->objLivro->getTitulo = $dado['titulo'];
+		
 		$this->objLivro->getPreco = $dado['preco'];
+		$this->objLivro->getAno_publicacao = $dado['ano_publicacao'];
+		$this->objLivro->getIdioma = $dado['idioma'];
+		$this->objLivro->getPaginas = $dado['paginas'];
+		$this->objLivro->getExemplares = $dado['exemplares'];
+		$this->objLivro->getEdicao = $dado['edicao'];
 		$this->objLivro->getCategoria = $dado['categoria'];
 		$this->objLivro->getEditora = $dado['editora'];
-		$this->objLivro->getCapa = $dado['capa'];
+		$this->objLivro->getCapa = $files['capa']['name'];
 
+
+		// Upload das imagens
+		$arquivo_tmp = $_FILES['capa']['tmp_name'];
+		$destino = "../fotos/";
+
+		$movefile = move_uploaded_file($arquivo_tmp , $destino .$this->objLivro->getCapa);
 
 		$titulo_livro = $this->objLivro->getTitulo;
 		$preco_livro = $this->objLivro->getPreco;
+		$ano_publicacao = $this->objLivro->getAno_publicacao;
+		$idioma = $this->objLivro->getIdioma;
+		$paginas = $this->objLivro->getPaginas;
+		$exemplares = $this->objLivro->getExemplares;
+		$edicao = $this->objLivro->getEdicao;
 		$categoria_livro = $this->objLivro->getCategoria;
 		$editora_livro = $this->objLivro->getEditora;
 		$capa_livro = $this->objLivro->getCapa;
@@ -304,58 +321,59 @@ class Administrador{
 			die();	
 		}
 
-		$sql = " insert into livros(titulo, preco, capa,id_estado ,id_categoria, id_editora) values('$titulo_livro', '$preco_livro', '$capa_livro', '$categoria_livro', '$editora_livro')";
+		$sql = " INSERT INTO livros(titulo, preco, ano_publicacao, idioma, paginas, exemplares, edicao ,capa, id_categoria, id_editora) 
+		VALUES('$titulo_livro','$preco_livro', '$ano_publicacao', '$idioma', '$paginas', '$exemplares', '$edicao' , '$capa_livro', '$categoria_livro', '$editora_livro')";
 
 		//Executar a query
 		if(mysqli_query($link, $sql)){
-			echo "<script>alert('Livro cadastrado com sucesso !!!')</script>";
-		}else{
+			//echo "<script>alert('Livro cadastrado com sucesso !!!')</script>";
+			
+			?>
+
+					<!DOCTYPE html>
+					<html>
+					<body>
+
+					<script>
+				//	function myFunction() {
+					var txt;
+					var r = confirm("Livro Cadastrado com Sucesso!!!");
+					if (r == true) {
+						window.open("../views/cadastrar_livro.php");
+						
+					//	parent.document.getElementById("formCadastrarse").reset();
+
+					//	location.reload();
+				//	myWindow.close();
+					} else {
+						
+					}
+					//document.getElementById("demo").innerHTML = txt;
+				//	}
+					</script>
+
+					</body>
+					</html>
+
+		
+		
+		
+	<?php	}else{
+			
+			/*echo $titulo_livro;
+			echo $preco_livro;
+			echo $categoria_livro;
+			echo $editora_livro;
+			echo $capa_livro;
+			*/
 			echo 'Erro ao cadastrar o livro !!!';
 		}
 
-		/*echo $titulo_livro;
-		echo $preco_livro;
-		echo $categoria_livro;
-		echo $editora_livro;
-		echo $capa_livro;*/
-
+	
 	}
 
 
 
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ?>

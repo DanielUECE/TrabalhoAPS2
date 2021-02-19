@@ -17,7 +17,7 @@ session_start();
 	$link = $objDb->conecta_mysql(); 
 
 
-	$sql = "SELECT l.*, c.genero, e.nome FROM livros AS l,  categoria AS c, editoras AS e WHERE l.id_categoria = c.id and l.id_editora = e.id and (l.titulo like '%$nome_livro%' or e.nome like '%$nome_livro%') ";
+	$sql = "SELECT l.*, c.genero, e.nome FROM livros AS l,  categoria AS c, editoras AS e WHERE l.id_categoria = c.id and l.id_editora = e.id and (l.titulo like '%$nome_livro%' or e.nome like '%$nome_livro%' or c.genero like '%$nome_livro%') ";
 
 
 	if($resultado_id = mysqli_query($link, $sql)){

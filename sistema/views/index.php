@@ -65,25 +65,13 @@
 							</button>
 						</div>
 						<div class="mainmenu pull-left">
-							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="index-user.php" class="active">Inicio</a></li>
-								<li class="dropdown"><a href="#">Pesquisa<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-										<li><a href="checkout.php">Produto1</a></li> 
-										<li><a href="carrinho.php">Produto2</a></li> 
-										<li><a href="login.php">Produto3</a></li> 
-                                    </ul>
-                                </li> 
-								<li><a href="contato.php">Contato</a></li>
-								<li><a href="contact-us.h">Teste</a></li>
-								<li><a href="contact-us.html">Teste</a></li>
-							</ul>
+							
 						</div>
 					</div>
 					<div class="col-sm-3">
 
-						<!-- Div da caixa de pesquisa ao conectar com o banco verificar se a função não está atrelada a esta div	
-							<div class="panel panel-default"> -->
+						<!-- Div da caixa de pesquisa ao conectar com o banco verificar se a função não está atrelada a esta div -->	
+							<div class="panel panel-default"> 
 								<div class="panel-body">
 									<form id="form_procurar_livros" class="input-group">
 										<input type="text" id="nome_livro" name="nome_livro" class="form-control" placeholder="Pesquisar" maxlength="200">
@@ -94,8 +82,7 @@
 										</span>
 									</form>
 								</div>
-						<!--</div>-->
-							<div id="livros" class="list-group"></div>  <!--Essa tag conterá a listagem de livros-->
+						    </div>
 						</div>
 					</div>
 		</div><!--/header-bottom-->
