@@ -29,14 +29,14 @@ session_start();
 			//echo $registro['nome_autor'];
 			
 			$id_livro = $registro['id'];
-			echo $id_livro;
+			//echo $id_livro;
 			//Procurando os autores de cada livro
 			$sql2 = "SELECT la.*, a.nome_autor FROM livros AS l, autores AS a, livro_autor AS la WHERE la.id_livro = '$id_livro' and la.id_autor = a.id ";
 
 
 			echo '<a href"#" class="list-group-item">';
 
-					echo ' <strong><img src="../fotos/'.$registro['capa'].'"></strong> </br></br>
+					echo ' <strong><img src="../fotos/'.$registro['capa'].'" width="100%" height="50%"></strong> </br></br>
 						  <strong>Título: '.$registro['titulo'].'</strong> </br>
 						  <strong>Preço: '.$registro['preco'].'</strong> </br> 
 						  <strong>Editora: '.$registro['nome'].'</strong> </br>

@@ -165,16 +165,15 @@
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
 	          </button>
-	          <img src="../imagens/imagem1.jpg" width=90%/>
+	          <img src="../imagens/imagem1.jpg" width=60%/>
 	        </div>
 	        
 	        <div id="navbar" class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav navbar-right">
-	          	<li><a href="home.php"><h4>Home</h4></a></li>
-	          	<li><a href="pesquisar_livros_por_categoria.php"><h4>Pesquisar livros por categoria</h4></a></li>
-	          	<li><a href="visualizarCarrinho.php"><h4>Visualizar Carrinho</h4></a></li>
-	          	<li><a href="visualizarCompras.php"><h4>Visualizar Compras</h4></a></li>
-	            <li><a href="../controllers/sair.php"><h4>Sair</h4></a></li>
+	          	<li><a href="home.php"><h3>Home</h3></a></li>
+	          	<li><a href="pesquisar_livros_por_categoria.php"><h3>Pesquisar livros por categoria</h3></a></li>
+	          	<li><a href="visualizarCarrinho.php"><h3>Visualizar Carrinho</h3></a></li>
+	            <li><a href="../controllers/sair.php"><h3>Sair</h3></a></li>
 	          </ul>
 	        </div><!--/.nav-collapse -->
 	      </div>
@@ -223,30 +222,50 @@
 	    	<div class="col-md-4">
 	    		<div class="panel-body">
 	    			
-					<h3>Itens inseridos no carrinho: </h3>
+					<h3>Formulário de pagamento: </h3>
 					<br/>
-					<div id="livros" class="list-group"></div>  <!--Essa tag conterá a listagem de livros-->
-					<!--<table class="table table-condensed">
-						<ul>
-							<?php
-								$sql = " select * from categoria";
-								$result_categorias = mysqli_query($link, $sql);
+					<form method="post" action="../controllers/finalizar_compraController.php" id="formCadastrarse">
+					<div class="form-group">
+						<h5>Nome: </h5>
+						<input type="text" class="form-control" id="nome_comprador" name="nome_comprador" placeholder="Nome" required="requiored">
+					</div>
 
-								while($row_categorias = mysqli_fetch_assoc($result_categorias)){
-									?>
-									<li>
-									<?php 
-										$id_categoria = $row_categorias['id'];
-									?>
-									<button type="button" class="btn btn-primary" id="<?php echo $id_categoria ?>" value="<?php echo $row_categorias['id']; ?>"><?php echo $row_categorias['genero']; ?><?php //echo " - "?><?php //echo $row_categorias['id']; ?>
-										
-									</button> </li> <br> <?php 
-								}
+					<div class="form-group">
+						<h5>Telefone: </h5>
+						<input type="text" class="form-control" id="telefone" name="telefone" placeholder="Telefone" required="requiored">
+					</div>
 
-							?>							
-							
-						</ul>
-  					</table>-->
+
+					<div class="form-group">
+						<h5>Endereço: </h5>
+						<input type="text" class="form-control" id="endereco_entrega" name="endereco_entrega" placeholder="Endereço" required="requiored">
+					</div>
+
+					<div class="form-group">
+						<h5>Selecione a forma de pagamento: </h5>
+						<select type="text" class="form-control" name="forma_pagamento" id="forma_pagamento">
+								<option value="debito">Cartão de Débito</option><br>
+								<option value="credito">Cartão de Crédito</option>	
+
+						</select>		
+					</div>
+
+			
+					<div class="form-group">
+						<h5>Digite o número do seu cartão: </h5>
+						<input type="text" class="form-control" id="cartao" name="cartao" placeholder="" required="requiored">
+					</div>
+
+					<div class="form-group">
+						<h5>Código de segurança: </h5>
+						<input type="text" class="form-control" id="codigo_cartao" name="codigo_cartao" placeholder="" required="requiored">
+					</div>
+					
+					
+					<button type="submit" name="btFinalizar" class="btn btn-primary form-control">Finalizar</button>
+				</form>
+
+					
 
 
 					

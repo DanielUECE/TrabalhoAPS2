@@ -160,15 +160,17 @@
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
 	          </button>
-	          <img src="../imagens/imagem1.jpg" width=60%/>
+	          <img src="../imagens/imagem1.jpg" width=100%/>
 	        </div>
 	        
 	        <div id="navbar" class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav navbar-right">
-	          	<li><a href="home.php"><h3>Home</h3></a></li>
-	          	<li><a href="pesquisar_livros_por_categoria.php"><h3>Pesquisar livros por categoria</h3></a></li>
-	          	<li><a href="visualizarCarrinho.php"><h3>Visualizar Carrinho</h3></a></li>
-	            <li><a href="../controllers/sair.php"><h3>Sair</h3></a></li>
+	          	<li><a href="home.php"><h4>Home</h4></a></li>
+	          	<li><a href="pesquisar_livros_por_categoria.php"><h4>Pesquisar livros por categoria</h4></a></li>
+	          	<li><a href="visualizarCarrinho.php"><h4>Visualizar Carrinho</h3></a></li></br>
+	          	<li><a href="visualizarCompras.php"><h4>Visualizar Compras</h4></a></li>
+	          	
+	            <li><a href="../controllers/sair.php"><h4>Sair</h4></a></li>
 	          </ul>
 	        </div><!--/.nav-collapse -->
 	      </div>

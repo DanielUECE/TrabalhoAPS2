@@ -3,7 +3,7 @@
 	//Abrindo a sessão
 	session_start();
 
-	/*include_once("db.class.php");
+	include_once("../db.class.php");
 
 	$objDb = new db();
 	$link = $objDb->conecta_mysql();
@@ -14,8 +14,34 @@
 	}
 
 
-	$id_usuario = $_SESSION['id'];*/
+	$id_usuario = $_SESSION['id'];
 
+	// qtd de itens no carrinho
+	$sql = " SELECT COUNT(*) AS qtde_itens FROM carrinho WHERE id_usuario = $id_usuario ";
+
+	$resultado_id = mysqli_query($link, $sql);
+	$qtde_itens = 0;
+	if($resultado_id){
+		$registro = mysqli_fetch_array($resultado_id, MYSQLI_ASSOC);
+		$qtde_itens = $registro['qtde_itens'];
+	}else{
+		echo 'Erro ao executar a query';
+	}
+
+
+	// Valor total dos itens do carrinho
+	$sql = " SELECT SUM(c.preco) AS valor_total FROM carrinho AS c WHERE id_usuario = $id_usuario ";
+
+	$resultado_id = mysqli_query($link, $sql);
+	$valor_total = 0;
+	if($resultado_id){
+		$registro = mysqli_fetch_array($resultado_id, MYSQLI_ASSOC);
+		
+		$valor_total = $registro['valor_total'];
+		
+	}else{
+		echo 'Erro ao executar a query';
+	}
 
 ?>
 
@@ -40,31 +66,6 @@
 			//Verificando se o documento foi carregado
 			$(document).ready( function(){
 
-				$('#btn_inserir_categorias').click(function(){
-
-					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_categorias.php";
-
-				});
-
-				$('#btn_inserir_autores').click(function(){
-
-					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_autores.php";
-
-				});
-
-				$('#btn_inserir_autores_nos_livros').click(function(){
-
-					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_autor_livro.php";
-
-				});
-
-				$('#btn_inserir_editoras').click(function(){
-
-					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_editoras.php";
-
-				});
-
-
 				$('#pagina_inicial').click(function(){
 					
 					// Direcionando o aluno para a página inicial.
@@ -77,21 +78,64 @@
 					window.location.href = "http://localhost/UECEBOOK/uecebook/home.php";
 				});
 
-				
-				//associar o evento de click ao botão
-				$('#btn_pesquisar_livros').click( function(){	
+				// Direcionando o aluno para uma determinada comunidade
+				/*$('#1').click(function(){
 
-					if($('#nome_livro').val().length > 0){
-						$.ajax({
+					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/romance.php";
+					
+				});*/
 
-							url: '../controllers/get_pesquisar_livros_categoria.php',
+				$('#2').click(function(){
+
+					window.location.href = "http://localhost/UECEBOOK/uecebook/comunidade_cct.php";
+
+				});
+
+				$('#3').click(function(){
+
+					window.location.href = "http://localhost/UECEBOOK/uecebook/comunidade_ch.php";
+
+				});
+
+				$('#4').click(function(){
+
+					window.location.href = "http://localhost/UECEBOOK/uecebook/comunidade_cesa.php";
+
+				});
+
+				$('#5').click(function(){
+
+					window.location.href = "http://localhost/UECEBOOK/uecebook/comunidade_ccs.php";
+
+				});
+
+				$.ajax({
+
+							url: '../controllers/visualizarComprasController.php',
 							method: 'post', 
-							data: $('#form_procurar_livros').serialize(),
+							//data: $('#form_procurar_livros').serialize(),
 							success: function(data){
-								$('#livros').html(data);
+								$('#compras').html(data);
 							
-								$('.btn-inserir-autores').click(function(){
-									window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_autor_livro.php";
+								$('.btn-remover-carrinho').click(function(){
+									//url: '../controllers/inserirCarrinho.php'
+
+									var id_livro = $(this).data('id_livro');
+									
+
+									$.ajax({
+										url: '../controllers/removerCarrinho.php',
+										method: 'post',
+										data: {id_livro_carrinho : id_livro},
+										success: function(data){
+											$('#total').html(data);
+											//alert('Livro inserido no carrinho com sucesso')
+										
+										}
+									});
+
+									
+									//window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_autor_livro.php";
 								});
 							}
 
@@ -100,60 +144,11 @@
 
 						});
 
-					}
+				$('#finalizar_compra').click(function(){
+					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/finalizar_compra.php";
 
-
-
-					//Verificando se há alguma coisa no campo
-					//if($('#nome_livro').val().length > 0){
-
-						//{ texto_postagem: $('#texto_postagem').val() }
-						// Enviando a mensagem do campo para o inclui_postagem.php
-					//	$.ajax({
-					//		url: 'get_livros.php',
-					//		method: 'post', 
-					//		data: $('#form_procurar_livros').serialize(),
-							/*success: function(data){
-								$('#livros').html(data);
-								
-								/*$('.btn_seguir').click( function(){
-									var id_aluno = $(this).data('id_aluno');
-
-									$('#btn_seguir_'+id_aluno).hide();
-									$('#btn_deixar_seguir_'+id_aluno).show();
-
-									$.ajax({
-										url: 'seguir.php',
-										method: 'post',
-										data: { seguir_id_aluno: id_aluno },
-										success: function(data){
-											alert('Registro efetuado com sucesso');
-										}
-									});
-								});*/
-
-								/*$('.btn_deixar_seguir').click( function(){
-									var id_aluno = $(this).data('id_aluno');
-
-									$('#btn_seguir_'+id_aluno).show();
-									$('#btn_deixar_seguir_'+id_aluno).hide();
-
-									$.ajax({
-										url: 'deixar_seguir.php',
-										method: 'post',
-										data: { deixar_seguir_id_aluno: id_aluno },
-										success: function(data){
-											alert('Registro removido com sucesso !!!');
-										}
-									});
-
-								});*/
-							//}
-						//});
-					//}
 				});
 			});
-
 		</script>
 	
 	</head>
@@ -170,14 +165,14 @@
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
 	          </button>
-	          <img src="../imagens/imagem1.jpg" width=100%/>
+	          <img src="../imagens/imagem1.jpg" width=60%/>
 	        </div>
 	        
 	        <div id="navbar" class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav navbar-right">
 	          	<li><a href="home.php"><h4>Home</h4></a></li>
 	          	<li><a href="pesquisar_livros_por_categoria.php"><h4>Pesquisar livros por categoria</h4></a></li>
-	          	<li><a href="visualizarCarrinho.php"><h4>Visualizar carrinho</h4></a></li>
+	          	<li><a href="visualizarCarrinho.php"><h4>Visualizar Carrinho</h4></a></li>
 	          	<li><a href="visualizarCompras.php"><h4>Visualizar Compras</h4></a></li>
 	            <li><a href="../controllers/sair.php"><h4>Sair</h4></a></li>
 	          </ul>
@@ -206,13 +201,10 @@
 
 	    		<br>
 	    		<br>
-	    		<br>
-	    		<br>
-	    		<br>
-	    		<br>
+	    		
 	    		<div class="panel panel-default">
 					<div class="panel-body">
-						<h2><?=$_SESSION['nome']?></h2>
+						<h2>Olá, <?=$_SESSION['nome']?> !!</h2>
 						
 					</div>
 				</div>
@@ -229,65 +221,81 @@
 				
 	    	</div>
 	    	<div class="col-md-4">
+	    		<div class="panel-body">
+	    			
+					<h3>Histórico de compras: </h3>
+					<h5>Obs: Verifique o status da compra para saber a situação do seu pedido. </h5>
+					<br/>
 
-	    		<h4>Pesquisar livros pela categoria: </h4>
+					<div id="compras" class="list-group"></div>
+					<!--<div id="livros" class="list-group"></div>-->  <!--Essa tag conterá a listagem de livros-->
+					<!--<table class="table table-condensed">
+						<ul>
+							<?php
+								$sql = " select * from categoria";
+								$result_categorias = mysqli_query($link, $sql);
 
-	    		<div class="panel panel-default">
-	    			<div class="panel-body">
-	    				<form id="form_procurar_livros" class="input-group">
-	    					<input type="text" id="nome_livro" name="nome_livro" class="form-control" placeholder="Que categoria você está procurando?" maxlength="200">
-	    					<span class="input-group-btn">
-	    						<button class="btn btn-default" id="btn_pesquisar_livros" type="button">
-	    							Procurar
-	    						</button>
-	    					</span>
-	    				</form>
-	    			</div>
-	    		</div>
+								while($row_categorias = mysqli_fetch_assoc($result_categorias)){
+									?>
+									<li>
+									<?php 
+										$id_categoria = $row_categorias['id'];
+									?>
+									<button type="button" class="btn btn-primary" id="<?php echo $id_categoria ?>" value="<?php echo $row_categorias['id']; ?>"><?php echo $row_categorias['genero']; ?><?php //echo " - "?><?php //echo $row_categorias['id']; ?>
+										
+									</button> </li> <br> <?php 
+								}
 
-	    		<div id="livros" class="list-group"></div>  <!--Essa tag conterá a listagem de livros-->
+							?>							
+							
+						</ul>
+  					</table>-->
 
-	    		
-	    		 	    		
+
+					
+				</div>
+	 	    		
 			</div>
 			<div class="col-md-4">
 				
 				
 
 				
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
+				
+				<div class="container">
 				<div class="col-md-3">
 				
+
+
+
+				 
+					<div class="panel panel-default">
+						
+						<div class="panel-body">
+							<strong>
+								<h1 style="color:blue;">Carrinho</h1>
+								<img src="../imagens/carrinho.jpg">
+							</strong>
+							<div class="col-md-6" id="itens"><h3><strong>Itens: </strong></h3><?= $qtde_itens ?></div>
+							<div class="col-md-6"><h3><strong>Total: </strong></h3><div id="total"></div>R$<?= $valor_total ?></div> 
+						</div>
+
+						<div> 
+							<button type="button" class="btn btn btn-info btn-block" id="finalizar_compra"><h5>Finalizar Compra</h5></button> 
+						</div>
+
+					</div>
 					
-												
+				 
 
-						<!--<table class="table table-condensed">
-							<ul>
-								<li>
-									<button type="button" id="btn_inserir_autores" class="btn btn-warning">Inserir novos autores</button>
-								</li> <br/>
-								<li>
-									<button type="button" id="btn_inserir_autores_nos_livros" class="btn btn-warning">Inserir autores nos livros </button>
-								</li> <br/>
-								<li>
-									<button type="button" id="btn_inserir_categorias" class="btn btn-warning">Inserir novas categorias</button>
-								</li> <br/>
-								<li>
-									<button type="button" id="btn_inserir_editoras" class="btn btn-warning">Inserir novas editoras</button>
-								</li>
-							</ul>
-						</table>-->
-						
-						
-						<!--<h3 class="active">Comunidades</h3>-->
 
-					<!--<table class="table table-condensed">
+
+
+
+					
+					<!--<h3 class="active">Comunidades</h3>
+						
+					<table class="table table-condensed">
 						<ul>
 							<?php
 								$sql = " select * from centro";
@@ -311,6 +319,7 @@
 
   						<!--<li><button type="button" class="btn btn-warning"></button></li><br>-->
 				</div>
+				</div>
 				
 			</div>
 
@@ -320,7 +329,7 @@
 
 			<br />
 			<div class="col-md-4"></div>
-			<!--<div class="col-md-4">Repositório de Trabalhos</div>-->
+			<div class="col-md-4"></div>
 			<div class="col-md-4"></div>
 
 		</div>
