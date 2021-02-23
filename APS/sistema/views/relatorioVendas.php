@@ -12,36 +12,29 @@
 	if(!isset($_SESSION['id'])){
 		header('Location: index.php?erro=1');
 	}
-
-
 	$id_usuario = $_SESSION['id'];
 
-	// qtd de itens no carrinho
-	$sql = " SELECT COUNT(*) AS qtde_itens FROM carrinho WHERE id_usuario = $id_usuario ";
+	///////////////////////// Obtendo o valor total de vendas do dia atual
+	// Obtendo a data atual
+	$dia_atual = date('d');
+	$mes_atual = date('m');
+	$ano_atual = date('Y');
+	$data_atual = $ano_atual . "-" . $mes_atual . "-" . $dia_atual;
 
-	$resultado_id = mysqli_query($link, $sql);
-	$qtde_itens = 0;
-	if($resultado_id){
-		$registro = mysqli_fetch_array($resultado_id, MYSQLI_ASSOC);
-		$qtde_itens = $registro['qtde_itens'];
-	}else{
-		echo 'Erro ao executar a query';
+	$sql = "SELECT c.id, c.id_usuario, c.valor_total, c.status_compra, c.data_compra, c.nome_comprador, c.nome_livro FROM compra AS c"; 
+
+	$valor_total_dia = 0;
+
+	if($resultado_id = mysqli_query($link, $sql)){
+		while($registro = mysqli_fetch_array($resultado_id, MYSQLI_ASSOC)){
+			list($data_compra, $hora_compra) = explode(' ', $registro['data_compra']);
+			if ($data_atual == $data_compra){
+				$valor_total_dia = $valor_total_dia + $registro['valor_total'];
+			}
+		}
 	}
 
 
-	// Valor total dos itens do carrinho
-	$sql = " SELECT SUM(c.preco) AS valor_total FROM carrinho AS c WHERE id_usuario = $id_usuario ";
-
-	$resultado_id = mysqli_query($link, $sql);
-	$valor_total = 0;
-	if($resultado_id){
-		$registro = mysqli_fetch_array($resultado_id, MYSQLI_ASSOC);
-		
-		$valor_total = $registro['valor_total'];
-		
-	}else{
-		echo 'Erro ao executar a query';
-	}
 
 ?>
 
@@ -66,6 +59,32 @@
 			//Verificando se o documento foi carregado
 			$(document).ready( function(){
 
+				$('#btn_inserir_categorias').click(function(){
+
+					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_categorias.php";
+
+				});
+
+				$('#btn_inserir_autores').click(function(){
+
+					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_autores.php";
+
+				});
+
+				$('#btn_inserir_autores_nos_livros').click(function(){
+
+					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_autor_livro.php";
+
+				});
+
+				$('#btn_inserir_editoras').click(function(){
+
+					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_editoras.php";
+
+				});
+
+
+
 				$('#pagina_inicial').click(function(){
 					
 					// Direcionando o aluno para a página inicial.
@@ -79,11 +98,11 @@
 				});
 
 				// Direcionando o aluno para uma determinada comunidade
-				/*$('#1').click(function(){
+				$('#1').click(function(){
 
-					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/romance.php";
+					window.location.href = "http://localhost/UECEBOOK/uecebook/comunidade_ced.php";
 					
-				});*/
+				});
 
 				$('#2').click(function(){
 
@@ -109,22 +128,23 @@
 
 				});
 
+
 				$.ajax({
 
-							url: '../controllers/get_livrosUsuario.php',
+							url: '../controllers/relatorioVendasController.php',
 							method: 'post', 
 							//data: $('#form_procurar_livros').serialize(),
 							success: function(data){
-								$('#livros').html(data);
+								$('#relatorioVendas').html(data);
 							
-								$('.btn-inserir-carrinho').click(function(){
+								$('.btn-remover-carrinho').click(function(){
 									//url: '../controllers/inserirCarrinho.php'
 
 									var id_livro = $(this).data('id_livro');
 									
 
 									$.ajax({
-										url: '../controllers/inserirCarrinho.php',
+										url: '../controllers/removerCarrinho.php',
 										method: 'post',
 										data: {id_livro_carrinho : id_livro},
 										success: function(data){
@@ -140,9 +160,9 @@
 							}
 
 						
-							
+					});
 
-						});
+
 			});
 		</script>
 	
@@ -160,17 +180,16 @@
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
 	          </button>
-	          <img src="../imagens/imagem1.jpg" width=100%/>
+	          <img src="../imagens/imagem1.jpg" width=90%/>
 	        </div>
 	        
 	        <div id="navbar" class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav navbar-right">
-	          	<li><a href="home.php"><h4>Home</h4></a></li>
-	          	<li><a href="pesquisar_livros_por_categoria.php"><h4>Pesquisar livros por categoria</h4></a></li>
-	          	<li><a href="visualizarCarrinho.php"><h4>Visualizar Carrinho</h3></a></li></br>
-	          	<li><a href="visualizarCompras.php"><h4>Visualizar Compras</h4></a></li>
-	          	
-	          	
+	          	<li><a href="homeAdm.php"><h4>Home</h4></a></li>
+	          	<li><a href="cadastrar_livro.php"><h4>Cadastrar novos livros</h4></a></li>
+	          	<li><a href="procurar_livros.php"><h4>Procurar livros</h4></a></li>
+	          	<li><a href="visualizarcomprasAdm.php"><h4>Acessar compras realizadas</h4></a></li>
+	          	<li><a href="relatorioVendas.php"><h4>Relatório de vendas do dia</h4></a></li>
 	            <li><a href="../controllers/sair.php"><h4>Sair</h4></a></li>
 	          </ul>
 	        </div><!--/.nav-collapse -->
@@ -198,10 +217,13 @@
 
 	    		<br>
 	    		<br>
-	    		
+	    		<br>
+	    		<br>
+	    		<br>
+	    		<br>
 	    		<div class="panel panel-default">
 					<div class="panel-body">
-						<h2>Olá, <?=$_SESSION['nome']?> !!</h2>
+						<h2><?=$_SESSION['nome']?></h2>
 						
 					</div>
 				</div>
@@ -218,37 +240,26 @@
 				
 	    	</div>
 	    	<div class="col-md-4">
+						
 	    		<div class="panel-body">
-	    			
-					<h3>Livros a venda: </h3>
-					<br/>
-					<div id="livros" class="list-group"></div>  <!--Essa tag conterá a listagem de livros-->
-					<!--<table class="table table-condensed">
-						<ul>
-							<?php
-								$sql = " select * from categoria";
-								$result_categorias = mysqli_query($link, $sql);
+	    		
+	    			<h3 style="color:blue;">Valor Total do dia: R$ <?= $valor_total_dia?> </h3>
 
-								while($row_categorias = mysqli_fetch_assoc($result_categorias)){
-									?>
-									<li>
-									<?php 
-										$id_categoria = $row_categorias['id'];
-									?>
-									<button type="button" class="btn btn-primary" id="<?php echo $id_categoria ?>" value="<?php echo $row_categorias['id']; ?>"><?php echo $row_categorias['genero']; ?><?php //echo " - "?><?php //echo $row_categorias['id']; ?>
-										
-									</button> </li> <br> <?php 
-								}
-
-							?>							
-							
-						</ul>
-  					</table>-->
+	    			<h3>Relatório de vendas do dia <?php $dia_atual = date('d');
+							$mes_atual = date('m');
+							$ano_atual = date('Y');
+							$data_atual = $ano_atual . "-" . $mes_atual . "-" . $dia_atual;
+							echo $data_atual;
+							?>: 
+					</h3>
+					<br>
+					<div id="relatorioVendas" class="list-group"></div>
 
 
-					
-				</div>
-	 	    		
+	    		</div>
+
+
+	    		 	    		
 			</div>
 			<div class="col-md-4">
 				
@@ -256,34 +267,24 @@
 
 				
 				
-				<div class="container">
+				<br>
+				<br>
+				<br>
+				<br>
 				<div class="col-md-3">
-				
-
-
-
-				 
-					<div class="panel panel-default">
-						
-						<div class="panel-body">
-							<strong>
-								<h1 style="color:blue;">Carrinho</h1>
-								<img src="../imagens/carrinho.jpg">
-							</strong>
-							<div class="col-md-6" id="itens"><h3><strong>Itens: </strong></h3><?= $qtde_itens ?></div>
-							<div class="col-md-6"><h3><strong>Total: </strong></h3><div id="total"></div>R$<?= $valor_total ?></div>
-						</div>
-					</div>
-				 
-
-
-
-
-
 					
-					<!--<h3 class="active">Comunidades</h3>
+					
+
+	    		</div>
+					
 						
-					<table class="table table-condensed">
+
+						
+						
+						
+						<!--<h3 class="active">Comunidades</h3>-->
+
+					<!--<table class="table table-condensed">
 						<ul>
 							<?php
 								$sql = " select * from centro";
@@ -307,7 +308,6 @@
 
   						<!--<li><button type="button" class="btn btn-warning"></button></li><br>-->
 				</div>
-				</div>
 				
 			</div>
 
@@ -317,7 +317,7 @@
 
 			<br />
 			<div class="col-md-4"></div>
-			<div class="col-md-4"></div>
+			<!--<div class="col-md-4">Repositório de Trabalhos</div>-->
 			<div class="col-md-4"></div>
 
 		</div>
@@ -355,27 +355,3 @@
 						</select>
 					</div>-->
 </html>	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

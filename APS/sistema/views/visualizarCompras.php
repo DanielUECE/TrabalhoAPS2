@@ -225,6 +225,7 @@
 	    			
 					<h3>Histórico de compras: </h3>
 					<h5>Obs: Verifique o status da compra para saber a situação do seu pedido. </h5>
+					<h6>(Realizada - Entregue a Transportadora - Em trânsito - Entregue)</h6>
 					<br/>
 
 					<div id="compras" class="list-group"></div>

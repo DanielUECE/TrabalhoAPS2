@@ -3,7 +3,7 @@
 	//Abrindo a sessão
 	session_start();
 
-	include_once("../db.class.php");
+	/*include_once("db.class.php");
 
 	$objDb = new db();
 	$link = $objDb->conecta_mysql();
@@ -14,34 +14,8 @@
 	}
 
 
-	$id_usuario = $_SESSION['id'];
+	$id_usuario = $_SESSION['id'];*/
 
-	// qtd de itens no carrinho
-	$sql = " SELECT COUNT(*) AS qtde_itens FROM carrinho WHERE id_usuario = $id_usuario ";
-
-	$resultado_id = mysqli_query($link, $sql);
-	$qtde_itens = 0;
-	if($resultado_id){
-		$registro = mysqli_fetch_array($resultado_id, MYSQLI_ASSOC);
-		$qtde_itens = $registro['qtde_itens'];
-	}else{
-		echo 'Erro ao executar a query';
-	}
-
-
-	// Valor total dos itens do carrinho
-	$sql = " SELECT SUM(c.preco) AS valor_total FROM carrinho AS c WHERE id_usuario = $id_usuario ";
-
-	$resultado_id = mysqli_query($link, $sql);
-	$valor_total = 0;
-	if($resultado_id){
-		$registro = mysqli_fetch_array($resultado_id, MYSQLI_ASSOC);
-		
-		$valor_total = $registro['valor_total'];
-		
-	}else{
-		echo 'Erro ao executar a query';
-	}
 
 ?>
 
@@ -66,6 +40,38 @@
 			//Verificando se o documento foi carregado
 			$(document).ready( function(){
 
+				$('#btn_inserir_categorias').click(function(){
+
+					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_categorias.php";
+
+				});
+
+				$('#btn_inserir_autores').click(function(){
+
+					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_autores.php";
+
+				});
+
+				$('#btn_inserir_autores_nos_livros').click(function(){
+
+					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_autor_livro.php";
+
+				});
+
+				$('#btn_inserir_editoras').click(function(){
+
+					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/inserir_editoras.php";
+
+				});
+
+				$('#btn_alterar_status').click(function(){
+
+					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/alterar_status_adm.php";
+
+				});
+
+
+
 				$('#pagina_inicial').click(function(){
 					
 					// Direcionando o aluno para a página inicial.
@@ -79,11 +85,11 @@
 				});
 
 				// Direcionando o aluno para uma determinada comunidade
-				/*$('#1').click(function(){
+				$('#1').click(function(){
 
-					window.location.href = "http://localhost/TrabalhoAPS2/APS/sistema/views/romance.php";
+					window.location.href = "http://localhost/UECEBOOK/uecebook/comunidade_ced.php";
 					
-				});*/
+				});
 
 				$('#2').click(function(){
 
@@ -109,22 +115,23 @@
 
 				});
 
+
 				$.ajax({
 
-							url: '../controllers/get_livrosUsuario.php',
+							url: '../controllers/visualizarComprasAdmController.php',
 							method: 'post', 
 							//data: $('#form_procurar_livros').serialize(),
 							success: function(data){
-								$('#livros').html(data);
+								$('#comprasUsuarios').html(data);
 							
-								$('.btn-inserir-carrinho').click(function(){
+								$('.btn-remover-carrinho').click(function(){
 									//url: '../controllers/inserirCarrinho.php'
 
 									var id_livro = $(this).data('id_livro');
 									
 
 									$.ajax({
-										url: '../controllers/inserirCarrinho.php',
+										url: '../controllers/removerCarrinho.php',
 										method: 'post',
 										data: {id_livro_carrinho : id_livro},
 										success: function(data){
@@ -143,6 +150,8 @@
 							
 
 						});
+
+
 			});
 		</script>
 	
@@ -160,17 +169,15 @@
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
 	          </button>
-	          <img src="../imagens/imagem1.jpg" width=100%/>
+	          <img src="../imagens/imagem1.jpg" width=60%/>
 	        </div>
 	        
 	        <div id="navbar" class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav navbar-right">
-	          	<li><a href="home.php"><h4>Home</h4></a></li>
-	          	<li><a href="pesquisar_livros_por_categoria.php"><h4>Pesquisar livros por categoria</h4></a></li>
-	          	<li><a href="visualizarCarrinho.php"><h4>Visualizar Carrinho</h3></a></li></br>
-	          	<li><a href="visualizarCompras.php"><h4>Visualizar Compras</h4></a></li>
-	          	
-	          	
+	          	<li><a href="homeAdm.php"><h4>Home</h4></a></li>
+	          	<li><a href="cadastrar_livro.php"><h4>Cadastrar novos livros</h4></a></li>
+	          	<li><a href="procurar_livros.php"><h4>Procurar livros</h4></a></li>
+	          	<li><a href="visualizarcomprasAdm.php"><h4>Acessar compras realizadas</h4></a></li>
 	            <li><a href="../controllers/sair.php"><h4>Sair</h4></a></li>
 	          </ul>
 	        </div><!--/.nav-collapse -->
@@ -198,10 +205,13 @@
 
 	    		<br>
 	    		<br>
-	    		
+	    		<br>
+	    		<br>
+	    		<br>
+	    		<br>
 	    		<div class="panel panel-default">
 					<div class="panel-body">
-						<h2>Olá, <?=$_SESSION['nome']?> !!</h2>
+						<h2><?=$_SESSION['nome']?></h2>
 						
 					</div>
 				</div>
@@ -218,72 +228,64 @@
 				
 	    	</div>
 	    	<div class="col-md-4">
+
 	    		<div class="panel-body">
 	    			
-					<h3>Livros a venda: </h3>
+
+	    			<h3>Compras realizadas: </h3>
 					<br/>
-					<div id="livros" class="list-group"></div>  <!--Essa tag conterá a listagem de livros-->
-					<!--<table class="table table-condensed">
-						<ul>
-							<?php
-								$sql = " select * from categoria";
-								$result_categorias = mysqli_query($link, $sql);
 
-								while($row_categorias = mysqli_fetch_assoc($result_categorias)){
-									?>
-									<li>
-									<?php 
-										$id_categoria = $row_categorias['id'];
-									?>
-									<button type="button" class="btn btn-primary" id="<?php echo $id_categoria ?>" value="<?php echo $row_categorias['id']; ?>"><?php echo $row_categorias['genero']; ?><?php //echo " - "?><?php //echo $row_categorias['id']; ?>
-										
-									</button> </li> <br> <?php 
-								}
-
-							?>							
-							
-						</ul>
-  					</table>-->
+					<div id="comprasUsuarios" class="list-group"></div>
 
 
-					
-				</div>
-	 	    		
+	    		</div>
+	    		
+	    		 	    		
 			</div>
 			<div class="col-md-4">
 				
 				
 
 				
-				
-				<div class="container">
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
 				<div class="col-md-3">
 				
-
-
-
-				 
-					<div class="panel panel-default">
-						
-						<div class="panel-body">
-							<strong>
-								<h1 style="color:blue;">Carrinho</h1>
-								<img src="../imagens/carrinho.jpg">
-							</strong>
-							<div class="col-md-6" id="itens"><h3><strong>Itens: </strong></h3><?= $qtde_itens ?></div>
-							<div class="col-md-6"><h3><strong>Total: </strong></h3><div id="total"></div>R$<?= $valor_total ?></div>
-						</div>
-					</div>
-				 
-
-
-
-
-
 					
-					<!--<h3 class="active">Comunidades</h3>
 						
-					<table class="table table-condensed">
+
+						<table class="table table-condensed">
+							<ul>
+								<li>
+									<button type="button" id="btn_inserir_autores" class="btn btn-warning">Inserir novos autores</button>
+								</li> <br/>
+								<li>
+									<button type="button" id="btn_inserir_autores_nos_livros" class="btn btn-warning">Inserir autores nos livros </button>
+								</li> <br/>
+								<li>
+									<button type="button" id="btn_inserir_categorias" class="btn btn-warning">Inserir novas categorias</button>
+								</li> <br/>
+								<li>
+									<button type="button" id="btn_inserir_editoras" class="btn btn-warning">Inserir novas editoras</button>
+								</li> <br/>
+
+
+								<li>
+									<button type="button" id="btn_alterar_status" class="btn btn-warning">Alterar o status de uma compra</button>
+								</li> <br/>
+
+							</ul>
+						</table>
+						
+						
+						<!--<h3 class="active">Comunidades</h3>-->
+
+					<!--<table class="table table-condensed">
 						<ul>
 							<?php
 								$sql = " select * from centro";
@@ -307,7 +309,6 @@
 
   						<!--<li><button type="button" class="btn btn-warning"></button></li><br>-->
 				</div>
-				</div>
 				
 			</div>
 
@@ -317,7 +318,7 @@
 
 			<br />
 			<div class="col-md-4"></div>
-			<div class="col-md-4"></div>
+			<!--<div class="col-md-4">Repositório de Trabalhos</div>-->
 			<div class="col-md-4"></div>
 
 		</div>
@@ -355,27 +356,3 @@
 						</select>
 					</div>-->
 </html>	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

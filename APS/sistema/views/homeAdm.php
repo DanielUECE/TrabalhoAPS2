@@ -108,6 +108,8 @@
 					window.location.href = "http://localhost/UECEBOOK/uecebook/comunidade_ccs.php";
 
 				});
+
+
 			});
 		</script>
 	
@@ -125,15 +127,17 @@
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
 	          </button>
-	          <img src="../imagens/imagem1.jpg" width=60%/>
+	          <img src="../imagens/imagem1.jpg" width=90%/>
 	        </div>
 	        
 	        <div id="navbar" class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav navbar-right">
-	          	<li><a href="homeAdm.php"><h3>Home</h3></a></li>
-	          	<li><a href="cadastrar_livro.php"><h3>Cadastrar novos livros</h3></a></li>
-	          	<li><a href="procurar_livros.php"><h3>Procurar livros</h3></a></li>
-	            <li><a href="../controllers/sair.php"><h3>Sair</h3></a></li>
+	          	<li><a href="homeAdm.php"><h4>Home</h4></a></li>
+	          	<li><a href="cadastrar_livro.php"><h4>Cadastrar novos livros</h4></a></li>
+	          	<li><a href="procurar_livros.php"><h4>Procurar livros</h4></a></li>
+	          	<li><a href="visualizarcomprasAdm.php"><h4>Acessar compras realizadas</h4></a></li>
+	          	<li><a href="relatorioVendas.php"><h4>Relatório de vendas do dia</h4></a></li>
+	            <li><a href="../controllers/sair.php"><h4>Sair</h4></a></li>
 	          </ul>
 	        </div><!--/.nav-collapse -->
 	      </div>
@@ -184,10 +188,6 @@
 	    	</div>
 	    	<div class="col-md-4">
 
-
-	    		
-
-
 	    		
 	    		 	    		
 			</div>
@@ -222,6 +222,8 @@
 								<li>
 									<button type="button" id="btn_inserir_editoras" class="btn btn-warning">Inserir novas editoras</button>
 								</li> <br/>
+								
+
 
 							</ul>
 						</table>

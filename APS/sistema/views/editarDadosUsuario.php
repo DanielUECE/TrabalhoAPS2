@@ -111,17 +111,15 @@
 
 				$.ajax({
 
-							url: '../controllers/get_livrosUsuario.php',
+							url: '../controllers/mostrarDadosUsuario.php',
 							method: 'post', 
 							//data: $('#form_procurar_livros').serialize(),
 							success: function(data){
-								$('#livros').html(data);
+								$('#dadosUsuario').html(data);
 							
-								$('.btn-inserir-carrinho').click(function(){
-									//url: '../controllers/inserirCarrinho.php'
+								$('.btn-editar-dados').click(function(){
+									//url: '../controllers/inserirCarrinho.php'	
 
-									var id_livro = $(this).data('id_livro');
-									
 
 									$.ajax({
 										url: '../controllers/inserirCarrinho.php',
@@ -220,9 +218,9 @@
 	    	<div class="col-md-4">
 	    		<div class="panel-body">
 	    			
-					<h3>Livros a venda: </h3>
+					<h3>Dados pessoais: </h3>
 					<br/>
-					<div id="livros" class="list-group"></div>  <!--Essa tag conterá a listagem de livros-->
+					<div id="dadosUsuario" class="list-group"></div>  <!--Essa tag conterá a listagem de livros-->
 					<!--<table class="table table-condensed">
 						<ul>
 							<?php
@@ -355,27 +353,3 @@
 						</select>
 					</div>-->
 </html>	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
